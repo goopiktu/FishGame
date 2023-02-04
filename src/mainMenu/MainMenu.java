@@ -12,11 +12,6 @@ import player.Player;
 public class MainMenu {
 	
 
-	//Dagupan_Mangrove_Forests mangroveForests = new Dagupan_Mangrove_Forests();
-	
-	
-	
-
 	public MainMenu(Game game) {
 		start(game);
 	}
