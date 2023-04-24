@@ -11,6 +11,7 @@ import Locations.fishingSpot.Fishing_Spot;
 import Locations.shop.Holgrehenn_Store;
 import mainMenu.Atlas;
 import materials.Materials;
+import potions.Potions;
 
 
 public class Player extends playerString{
@@ -19,7 +20,8 @@ public class Player extends playerString{
 	private double money;
 	private String playerLocation;
 	private ArrayList<Materials> bag;
-	
+	private boolean keepRunning;
+	private boolean bait;
  	
 	
 	public Player(String name) {
@@ -27,6 +29,9 @@ public class Player extends playerString{
 		money = 0f;
 		playerLocation = "Geffen Town";
 		bag = new ArrayList<Materials>();
+		keepRunning = true;
+		bait = false;
+
 		
 	}
 	
@@ -36,6 +41,24 @@ public class Player extends playerString{
 		this.money = money;
 		this.playerLocation = playerLocation;
 		this.bag = new ArrayList<Materials>();
+	}
+
+	public boolean getBait() {
+		return bait;
+	}
+
+	public void setbait(boolean bait) {
+		this.bait = bait;
+	}
+
+
+
+	public boolean getkeepRunning() {
+		return keepRunning;
+	}
+
+	public void setkeepRunning(boolean keepRunning) {
+		this.keepRunning = keepRunning;
 	}
 	
 	public String getPlayerLocation() {
@@ -88,7 +111,7 @@ public class Player extends playerString{
 	}
 
 	// catch fish isnt right i have to think of a way to use the rareity var
-	public void catchFish(Player pl, Fishing_Spot f, Boolean bait) {
+	public void catchFish(Player pl, Fishing_Spot f) {
 		
 		Random rand = new Random();
 		double chance = rand.nextInt(10) + 1;
@@ -97,7 +120,7 @@ public class Player extends playerString{
 		// [1 2 3 4 5 6 7][8 9 10] *With magical bait  
 		int chanceCommon = 9;
 
-		if(bait) {
+		if(this.getBait()) {
 			chanceCommon -= 2;
 		} 
 		
@@ -109,17 +132,18 @@ public class Player extends playerString{
 			pl.addItemsToBag(f.getFishes().get(0));
 			fishCaughtRareString(f);
 		}
-		    
+		this.setbait(false);	
 	}
 
-	public boolean useBait(Player player, Atlas atlas) {
+	public void useBait(Player player, Atlas atlas) {
 		int i = atlas.getIndexMat("Magical Bait");
 
 		if (player.checkItem(atlas.getAtlas().get(i))){
 			player.bag.remove(atlas.getAtlas().get(i));
-			return true;
-		}										
-		return false;		
+			this.setbait(true);
+		} else {
+			this.setbait(false);	
+		}											
 	}
 
 	public boolean checkItem(Materials material) {
@@ -132,7 +156,7 @@ public class Player extends playerString{
 	public void buy(Materials materials, Player player, Holgrehenn_Store shop, int qty) {
 		if (! player.playerLocation.equals(shop.getName()) || player.getMoney() < materials.getPrice())
 			return;
-		subMoney(materials.getPrice());  
+		subMoney(materials.getPrice() * qty);  
 		addMultiItemsToBag(materials , qty);
 	}
 
@@ -188,10 +212,17 @@ public class Player extends playerString{
 	}
 
 
-	public void craftPotion() {
-
-
-
+	public void craftPotion(Potions potion) {
+		boolean materials = true;
+		for (int i = 0; i < potion.getRecipe().size(); i++) {
+			materials = checkItem(potion.getRecipe().get(i));
+		}
+		if(materials) {
+			for (int i = 0; i < potion.getRecipe().size(); i++) {
+				removefromBag(potion.getRecipe().get(i).getName(), this);
+			}
+			craftPotionString(potion);
+		}
 	}
 	
 	
