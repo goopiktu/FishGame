@@ -69,10 +69,12 @@ public class Player extends playerString{
 	public void checkBag() {
 		int count = 1;
 		Set<Materials> st = new HashSet<Materials>(bag);
+		System.out.println("====================================");
 		for (Materials m : st) {
 			checkBagString(count, m, bag);
 			count++;	
 		}
+		System.out.println("====================================");
 		count = 0;
 	}
 
@@ -126,10 +128,6 @@ public class Player extends playerString{
 		}
 		return false;
 	}
-
-	
-	
-	
 	
 	public void buy(Materials materials, Player player, Holgrehenn_Store shop, int qty) {
 		if (! player.playerLocation.equals(shop.getName()) || player.getMoney() < materials.getPrice())

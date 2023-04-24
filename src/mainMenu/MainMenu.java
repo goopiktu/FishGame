@@ -106,6 +106,7 @@ public class MainMenu {
 		player.status();
 		System.out.println("[1] Buy");
 		System.out.println("[2] Sell");
+		System.out.println("[3] Go back");
 		
 		int input = Game.scInt();
 		Game.scStr();
@@ -131,6 +132,7 @@ public class MainMenu {
 				player.buy(store.getMats().get(index), player, store, qty);
 
 				Choices(player, game);
+				break;
 			}
 			case 2: {
 				player.checkBag();
@@ -145,6 +147,11 @@ public class MainMenu {
 				player.sell(player.getBag().get(index), player, store, qty);
 
 				Choices(player, game);
+				break;
+			}
+			case 3: {
+				Choices(player, game); 
+				break;
 			}
 			default:
 				break;
