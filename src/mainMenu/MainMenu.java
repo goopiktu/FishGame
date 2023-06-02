@@ -173,9 +173,7 @@ public class MainMenu {
 				Game.scStr();
 
 			
-				//player.removefromBag(player.getItem_id().get(index).getName());
 				player.sell(player.getItem_id().get(index), player, store, qty);
-
 				Choices(player, game);
 				break;
 			}

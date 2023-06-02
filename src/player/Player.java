@@ -79,12 +79,15 @@ public class Player extends playerString{
 		Set<Materials> uniqueItems = new HashSet<>(bag);
 		
 		int iteration = 0;
-
+		System.out.println("=====================================");
 		for (Materials item : uniqueItems) {
 			iteration++;	
 			item_id.put(iteration, item);
 			checkBagString(iteration, item, bag);	
 		}
+		if(iteration == 0)
+			System.out.println("EMPTY");
+		System.out.println("=====================================");
 		
 	}
 
@@ -212,6 +215,9 @@ public class Player extends playerString{
 				removefromBag(potion.getRecipe().get(i).getName());
 			}
 			craftPotionString(potion);
+		}
+		else {
+			System.out.println("not enough items to craft potion");
 		}
 	}
 	
