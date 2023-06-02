@@ -17,13 +17,11 @@ public class MainMenu {
 		System.out.println("Welcome Adventurer! What is your name? ");
 		String name = Game.scStr();
 		Player player = new Player(name);
-
-
 		Choices(player, game);
 	}
 
 	public void Choices(Player player, Game game) {
-		while(player.getkeepRunning()) {
+		while(game.getkeepRunning()) {
 				player.status();
 			if (player.getPlayerLocation().equals(game.getGeffenTown().getName())) {
 				System.out.println("[1] Craft Potion");
@@ -126,7 +124,7 @@ public class MainMenu {
 				break;
 			}
 			case 8: {
-				player.setkeepRunning(false);
+				game.setkeepRunning(false);
 				break;
 			}
 			default:
@@ -147,37 +145,36 @@ public class MainMenu {
 	}
 
 	private void shopMenu(Player player, int input, Holgrehenn_Store store, Game game) {
-		String name = "";
-		int qty = 0;
-		int index = 0;
+		
+		
 		
 		switch (input) {
 			case 1: {
 				
 				store.showShop();
 				System.out.println("What do you want to buy:");
-				name = Game.scStr();
+				int index = Game.scInt() - 1;
 				System.out.println("How much do you want to buy:");
-				qty = Game.scInt();
+				int qty = Game.scInt();
 				Game.scStr();
 				
-				index = store.lookForItem(name);
+				
 				player.buy(store.getMats().get(index), player, store, qty);
-
 				Choices(player, game);
 				break;
 			}
 			case 2: {
+				
 				player.checkBag();
 				System.out.println("What do you want to sell:");
-				name = Game.scStr();
+				int index = Game.scInt();
 				System.out.println("How much do you want to sell:");
-				qty = Game.scInt();
+				int qty = Game.scInt();
 				Game.scStr();
 
-				index = player.lookForItem(name);
-				
-				player.sell(player.getBag().get(index), player, store, qty);
+			
+				//player.removefromBag(player.getItem_id().get(index).getName());
+				player.sell(player.getItem_id().get(index), player, store, qty);
 
 				Choices(player, game);
 				break;
@@ -211,7 +208,7 @@ public class MainMenu {
 				break;
 			}
 			case 2: {
-				player.useBait(player, game.getAtlas()); 
+				player.useBait(); 
 				fishChoice(player, fspot, game);
 				break;
 			}

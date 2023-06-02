@@ -4,7 +4,6 @@ import java.util.Scanner;
 import Locations.fishingSpot.*;
 import Locations.*;
 import Locations.shop.*;
-import mainMenu.Atlas;
 import mainMenu.MainMenu;
 import potions.*;
 
@@ -13,14 +12,14 @@ import potions.*;
 public class Game {
 	//boolean run = true;
 	static Scanner sc = new Scanner(System.in);
-	
+	private boolean keepRunning = true;
+
 	private Taal_Lake taalLake;
 	private Galathea_Deep galatheaDeep;
 	private Dagupan_Mangrove_Forests mangroveForests;
 	private Mindanao_Current mindanaoCurrent;
 	private Holgrehenn_Store holgrehennStore;
 	private Town geffenTown;
-	private Atlas atlas;
 	private MainMenu menu;
 	private Air_Potion airPotion;
 	private Earth_Potion earthPotion;
@@ -42,8 +41,8 @@ public class Game {
 		earthPotion = new Earth_Potion("Earth Potion", mangroveForests, holgrehennStore);
 		firePotion = new Fire_Potion("Fire Potion", taalLake, holgrehennStore);
 		waterPotion = new Water_Potion("Water Potion", galatheaDeep, holgrehennStore);
-		atlas = new Atlas(this);
 		menu = new MainMenu(this);
+		
 	}
 	
 	public static void main(String[] args) {
@@ -51,6 +50,13 @@ public class Game {
 		new Game();
 	}
 	
+	public boolean getkeepRunning() {
+		return keepRunning;
+	}
+
+	public void setkeepRunning(boolean keepRunning) {
+		this.keepRunning = keepRunning;
+	}
 
 	
 	public static String scStr() {
@@ -103,10 +109,6 @@ public class Game {
 		return geffenTown;
 	}
 
-	public Atlas getAtlas() {
-		return atlas;
-	}
-
 	public MainMenu getMenu() {
 		return menu;
 	}
@@ -115,4 +117,3 @@ public class Game {
 	
 	
 }
-		

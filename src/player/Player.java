@@ -1,15 +1,14 @@
 package player;
 
 import java.util.ArrayList;
-
+import java.util.HashMap;
 import java.util.HashSet;
-
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
 import Locations.fishingSpot.Fishing_Spot;
 import Locations.shop.Holgrehenn_Store;
-import mainMenu.Atlas;
 import materials.Materials;
 import potions.Potions;
 
@@ -20,27 +19,23 @@ public class Player extends playerString{
 	private double money;
 	private String playerLocation;
 	private ArrayList<Materials> bag;
-	private boolean keepRunning;
+	private HashMap<Integer, Materials> item_id;
+
 	private boolean bait;
  	
 	
 	public Player(String name) {
 		this.name = name;
-		money = 0f;
+		money = 3000f;
 		playerLocation = "Geffen Town";
 		bag = new ArrayList<Materials>();
-		keepRunning = true;
 		bait = false;
-
-		
+		item_id = new HashMap<>();
 	}
-	
 
-	public Player(String name, double money, String playerLocation){
-		this.name = name;
-		this.money = money;
-		this.playerLocation = playerLocation;
-		this.bag = new ArrayList<Materials>();
+	
+	public HashMap<Integer, Materials> getItem_id() {
+		return item_id;
 	}
 
 	public boolean getBait() {
@@ -51,15 +46,6 @@ public class Player extends playerString{
 		this.bait = bait;
 	}
 
-
-
-	public boolean getkeepRunning() {
-		return keepRunning;
-	}
-
-	public void setkeepRunning(boolean keepRunning) {
-		this.keepRunning = keepRunning;
-	}
 	
 	public String getPlayerLocation() {
 		return playerLocation;
@@ -85,24 +71,29 @@ public class Player extends playerString{
 		this.money = money;
 	}
 
-	public ArrayList<Materials> getBag() {
+	public ArrayList<Materials> getBag() {	
 		return bag;
 	}
 
 	public void checkBag() {
-		int count = 1;
-		Set<Materials> st = new HashSet<Materials>(bag);
-		System.out.println("====================================");
-		for (Materials m : st) {
-			checkBagString(count, m, bag);
-			count++;	
+		Set<Materials> uniqueItems = new HashSet<>(bag);
+		
+		int iteration = 0;
+
+		for (Materials item : uniqueItems) {
+			iteration++;	
+			item_id.put(iteration, item);
+			checkBagString(iteration, item, bag);	
 		}
-		System.out.println("====================================");
-		count = 0;
+		
 	}
 
-	public void addItemsToBag(Materials materials) {
-		this.bag.add(materials);
+	public void addItemToBag(Materials materials) {
+		bag.add(materials);
+	}
+
+	public void addItemsToBag(List<Materials> materials) {
+		bag.addAll(bag);
 	}
 
 	
@@ -110,7 +101,7 @@ public class Player extends playerString{
 		statusString(name, playerLocation, money);
 	}
 
-	// catch fish isnt right i have to think of a way to use the rareity var
+
 	public void catchFish(Player pl, Fishing_Spot f) {
 		
 		Random rand = new Random();
@@ -125,21 +116,20 @@ public class Player extends playerString{
 		} 
 		
 		if (chance <= chanceCommon) {
-			pl.addItemsToBag(f.getFishes().get(1));
+			pl.addItemToBag(f.getFishes().get(1));
 			fishCaughtCommonString(f);
 		}
 		else {
-			pl.addItemsToBag(f.getFishes().get(0));
+			pl.addItemToBag(f.getFishes().get(0));
 			fishCaughtRareString(f);
 		}
 		this.setbait(false);	
 	}
 
-	public void useBait(Player player, Atlas atlas) {
-		int i = atlas.getIndexMat("Magical Bait");
-
-		if (player.checkItem(atlas.getAtlas().get(i))){
-			player.bag.remove(atlas.getAtlas().get(i));
+	public void useBait() {
+	
+		if (this.lookForItem("Magical Bait")){
+			this.removefromBag("Magical Bait");
 			this.setbait(true);
 		} else {
 			this.setbait(false);	
@@ -189,26 +179,26 @@ public class Player extends playerString{
 	public void removeItemsFromBag(Materials materials, int qty, Player player) {
 		for (int i = 0; i < qty; i++) {
 			addMoney(materials.getPrice());
-			removefromBag(materials.getName(), player);
+			removefromBag(materials.getName());
 		}
 	}
 
-	public void removefromBag(String name, Player player) {
+	public void removefromBag(String name) {
 
-		for (Materials i : player.bag) {
+		for (Materials i : this.bag) {
 			if(i.getName().equals(name)) {
-				player.bag.remove(i);
+				this.bag.remove(i);
 				return;
 			}
 		}	
 	}
 
-	public int lookForItem (String name) {
+	public boolean lookForItem (String name) {
 		for (int i = 0; i < bag.size(); i++) {
             if(bag.get(i).getName().equals(name))
-                return i;
+                return true;
         }
-        return -1;
+        return false;
 	}
 
 
@@ -219,7 +209,7 @@ public class Player extends playerString{
 		}
 		if(materials) {
 			for (int i = 0; i < potion.getRecipe().size(); i++) {
-				removefromBag(potion.getRecipe().get(i).getName(), this);
+				removefromBag(potion.getRecipe().get(i).getName());
 			}
 			craftPotionString(potion);
 		}

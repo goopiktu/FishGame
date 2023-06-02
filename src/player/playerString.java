@@ -6,20 +6,29 @@ import Locations.fishingSpot.Fishing_Spot;
 import materials.Materials;
 import potions.*;
 
-class playerString {
+class playerString{
 
     
 
     public void checkBagString(int count, Materials m, ArrayList<Materials> bag){
-        String s = String.format("|| [%d] %s %s ||", 
-                                 count, m.getName(), Collections.frequency(bag, m));
+        
+        int string_length = 33;
+        char character_padding = ' ';
+
+        
+
+        String cat = "[" + count + "] " + m.getName() + " " + Collections.frequency(bag, m);
+        
+
+        String s = String.format("||  %" + (-string_length) + "s" + "||" , cat).replace(' ', character_padding);
         
         System.out.println(s);
+        //return bag;
     }
 
     public void statusString(String name, String playerLocation, double money) {
         
-        int string_length = 32;
+        int string_length = 35;
         char character_padding = ' ';
         name = "Name: " + name;
         playerLocation = "Location: " + playerLocation;
@@ -34,9 +43,9 @@ class playerString {
 
         String s = n + p + m;
                                  
-        System.out.println("------------------------------------");
+        System.out.println("---------------------------------------");
 		System.out.println(s);
-        System.out.println("------------------------------------");
+        System.out.println("---------------------------------------");
     }
 
     public void fishCaughtCommonString(Fishing_Spot f) {
