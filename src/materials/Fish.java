@@ -12,11 +12,6 @@ public class Fish extends Materials{
         this.rareity = rareity;
     }
 
-   
-    // public Fish(double rareity) {
-    //     this.rareity = rareity;
-    // }
-
     public String getRareity() {
         return rareity;
     }
@@ -28,7 +23,8 @@ public class Fish extends Materials{
     @Override
     public String toString() {
         
-        String s = String.format("Name: %-20s\tPrice: %,.2f\t\tLocation: %-26s\tRareity: %,.2f", this.getName(), this.getPrice(), this.location, this.rareity);
+        String s = String.format("Name: %-20s\tPrice: %,.2f\t\tLocation: %-26s\tRareity: %-20s", 
+        this.getName(), this.getPrice(), this.location, this.rareity);
         return s;
     }
 

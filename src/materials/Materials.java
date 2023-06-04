@@ -33,7 +33,6 @@ public class Materials {
     }
 
     public String toString() {
-		
 		String s = String.format("%-20s\tPrice: %,.2f\t", this.name, this.price);
 		return s;
 	}
