@@ -26,7 +26,7 @@ public class Player extends playerString{
 	
 	public Player(String name) {
 		this.name = name;
-		money = 3000f;
+		money = 0f;
 		playerLocation = "Geffen Town";
 		bag = new ArrayList<Materials>();
 		bait = false;
@@ -79,7 +79,7 @@ public class Player extends playerString{
 		Set<Materials> uniqueItems = new HashSet<>(bag);
 		
 		int iteration = 0;
-		System.out.println("=====================================");
+		System.out.println("=======================================");
 		for (Materials item : uniqueItems) {
 			iteration++;	
 			item_id.put(iteration, item);
@@ -87,7 +87,7 @@ public class Player extends playerString{
 		}
 		if(iteration == 0)
 			System.out.println("EMPTY");
-		System.out.println("=====================================");
+		System.out.println("=======================================");
 		
 	}
 
@@ -134,8 +134,10 @@ public class Player extends playerString{
 		if (this.lookForItem("Magical Bait")){
 			this.removefromBag("Magical Bait");
 			this.setbait(true);
+			System.out.println("^using bait^");
 		} else {
 			this.setbait(false);	
+			System.out.println("^go to the shop to purchase some bait^");
 		}											
 	}
 
@@ -207,14 +209,19 @@ public class Player extends playerString{
 
 	public void craftPotion(Potions potion) {
 		boolean materials = true;
+
 		for (int i = 0; i < potion.getRecipe().size(); i++) {
 			materials = checkItem(potion.getRecipe().get(i));
+			System.out.println(materials);
+			if(!materials) 
+				break;
 		}
 		if(materials) {
 			for (int i = 0; i < potion.getRecipe().size(); i++) {
 				removefromBag(potion.getRecipe().get(i).getName());
 			}
 			craftPotionString(potion);
+			addItemToBag(potion);
 		}
 		else {
 			System.out.println("not enough items to craft potion");

@@ -11,6 +11,7 @@ public class Earth_Potion extends Potions{
         addRecipe(shop.getMats().get(0));
         addRecipe(shop.getMats().get(1));
         addRecipe(shop.getMats().get(2));
+        setPrice();
     }
 
 }

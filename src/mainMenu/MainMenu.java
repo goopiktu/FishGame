@@ -56,6 +56,7 @@ public class MainMenu {
 		System.out.println("[2] Earth Potion");
 		System.out.println("[3] Fire Potion");
 		System.out.println("[4] Water Potion");
+		System.out.println("[x] Back");
 		
 		int input = Game.scInt();
 		Game.scStr();
@@ -64,25 +65,32 @@ public class MainMenu {
 	}
 
 	public void craftMenu(Player player, int input, Game game) {
+		
+		
 		switch (input) {
 			case 1: {
+				game.getAirPotion().showRecipe();
 				player.craftPotion(game.getAirPotion());
 				break;
 			}
 			case 2: {
+				game.getEarthPotion().showRecipe();
 				player.craftPotion(game.getEarthPotion()); 
 				break;
 			}
 			case 3: {
+				game.getFirePotion().showRecipe();
 				player.craftPotion(game.getFirePotion());
 				break;
 			}
 			case 4: {
+				game.getWaterPotion().showRecipe();
 				player.craftPotion(game.getWaterPotion());
 				break;
 			} 
 			default:
-				throw new IllegalArgumentException("Unexpected value: " + input);
+				Choices(player, game);
+				//throw new IllegalArgumentException("Unexpected value: " + input);
 		}
 	}
 
@@ -128,7 +136,8 @@ public class MainMenu {
 				break;
 			}
 			default:
-				throw new IllegalArgumentException("Unexpected value: " + input);
+				Choices(player, game);
+				//throw new IllegalArgumentException("Unexpected value: " + input);
 		}
 		
 	}
@@ -137,7 +146,7 @@ public class MainMenu {
 		player.status();
 		System.out.println("[1] Buy");
 		System.out.println("[2] Sell");
-		System.out.println("[3] Go back");
+		System.out.println("[x] Go back");
 		
 		int input = Game.scInt();
 		Game.scStr();
@@ -177,21 +186,18 @@ public class MainMenu {
 				Choices(player, game);
 				break;
 			}
-			case 3: {
-				Choices(player, game); 
-				break;
-			}
 			default:
-				throw new IllegalArgumentException("Unexpected value: " + input);
+				Choices(player, game); 
 		}
 
 	}
 
 	private void fishChoice(Player player, Fishing_Spot fspot, Game game) {
 		player.status();
-		System.out.println("[1] Go back");
-		System.out.println("[2] Use bait");
-		System.out.println("[3] Catch Fish");
+		
+		System.out.println("[1] Use bait");
+		System.out.println("[2] Catch Fish");
+		System.out.println("[x] Go back");
 		
 		int input = Game.scInt();
 		fishMenu(player, input, fspot, game);
@@ -202,21 +208,17 @@ public class MainMenu {
 
 		switch (input) {
 			case 1: {
-				Choices(player, game); 
-				break;
-			}
-			case 2: {
 				player.useBait(); 
 				fishChoice(player, fspot, game);
 				break;
 			}
-			case 3: {
+			case 2: {
 				player.catchFish(player, fspot); 
 				Choices(player, game);
 				break;
 			}
 			default:
-				throw new IllegalArgumentException("Unexpected value: " + input);
+				Choices(player, game);
 		}
 	}
 
