@@ -1,6 +1,6 @@
 package materials;
 
-public class Materials {
+public abstract class Materials {
     
     private String name;
     private double price;
@@ -61,4 +61,23 @@ public class Materials {
 		return s;
 	}
    //Name: Price: Location: Rareity: 
+
+   @Override 
+   public boolean equals(Object o) {
+        if(o == this)
+            return true;
+        if (!(o instanceof Materials)) { 
+            return false; 
+        } 
+
+        Materials c = (Materials) o;
+            
+        return Double.compare(c.price, this.price) == 0 &&
+                              c.name == this.name &&
+                              c.location == this.location &&
+                              c.rareity == this.rareity;
+               
+
+   }
+
 }

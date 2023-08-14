@@ -3,6 +3,7 @@ package potions;
 import java.util.ArrayList;
 
 import materials.Materials;
+import player.Player;
 
 
 
@@ -36,7 +37,11 @@ public class Potions extends Materials{
         recipe.add(mat);
     } 
 
-    public void showRecipe() {
+    public void showRecipe(Player player) {
+
+        int recipe_counter = 0;
+        int player_material_counter = 0;
+
         System.out.println("\nCrafting Recipe:");
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         
@@ -45,7 +50,12 @@ public class Potions extends Materials{
         System.out.print(s);
         System.out.println("+\t\t\t\t\t\t\t\t\t\t\t    +");
         for (Materials materials : recipe) {
-            System.out.println("+  " + materials.toString()+ "+");
+            if(player.bag.contains(materials)) 
+                player_material_counter++;
+
+            System.out.println("+  " + materials.toString()+ "+  " +  player_material_counter +"/"+ recipe_counter + "  +");
+
+            
         }
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
         // \t \t \t

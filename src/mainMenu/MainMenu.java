@@ -1,5 +1,6 @@
 package mainMenu;
 
+
 import Locations.fishingSpot.*;
 import Locations.shop.Holgrehenn_Store;
 import main.Game;
@@ -69,22 +70,22 @@ public class MainMenu {
 		
 		switch (input) {
 			case 1: {
-				game.getAirPotion().showRecipe();
+				game.getAirPotion().showRecipe(player);
 				player.craftPotion(game.getAirPotion());
 				break;
 			}
 			case 2: {
-				game.getEarthPotion().showRecipe();
+				game.getEarthPotion().showRecipe(player);
 				player.craftPotion(game.getEarthPotion()); 
 				break;
 			}
 			case 3: {
-				game.getFirePotion().showRecipe();
+				game.getFirePotion().showRecipe(player);
 				player.craftPotion(game.getFirePotion());
 				break;
 			}
 			case 4: {
-				game.getWaterPotion().showRecipe();
+				game.getWaterPotion().showRecipe(player);
 				player.craftPotion(game.getWaterPotion());
 				break;
 			} 
@@ -127,7 +128,8 @@ public class MainMenu {
 				break;
 			}
 			case 7: {
-				player.checkBag(); 
+				// System.out.println(Arrays.toString(player.bag.getBag().toArray()));
+				
 				Choices(player, game); 
 				break;
 			}
@@ -174,7 +176,7 @@ public class MainMenu {
 			}
 			case 2: {
 				
-				player.checkBag();
+				player.bag.getBag().toString();
 				System.out.println("What do you want to sell:");
 				int index = Game.scInt();
 				System.out.println("How much do you want to sell:");
@@ -208,7 +210,7 @@ public class MainMenu {
 
 		switch (input) {
 			case 1: {
-				player.useBait(); 
+				player.useBait(game.getHolgrehennStore().getMats().get(3)); 
 				fishChoice(player, fspot, game);
 				break;
 			}

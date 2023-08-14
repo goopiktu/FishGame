@@ -43,6 +43,7 @@ public class Game {
 		waterPotion = new Water_Potion("Water Potion", galatheaDeep, holgrehennStore);
 		menu = new MainMenu(this);
 		
+		
 	}
 	
 	public static void main(String[] args) {

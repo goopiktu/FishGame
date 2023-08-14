@@ -1,55 +1,30 @@
 package main;
 
-import java.util.Properties;
+import bag.Bag;
+import materials.StoreItems;
 
-import javax.lang.model.util.ElementScanner14;
+import java.util.Collections;
 
-import org.w3c.dom.html.HTMLBodyElement;
-
-import Locations.fishingSpot.Mindanao_Current;
 import Locations.shop.Holgrehenn_Store;
-import materials.Fish;
-import materials.Materials;
-import player.Player;
-import potions.Air_Potion;
-import potions.Potions;
 
 public class test {
-    
     public static void main(String[] args) {
-        // Fish hill = new Fish("Hillstream Loaches", 1000f, "Mindanao Current", "Rare");
-        // Fish tuna = new Fish("Tuna", 45f, "Mindanao Current", "Common");
+        Holgrehenn_Store item = new Holgrehenn_Store();
+        Bag bag = new Bag();
+        bag.addItem(item.getMats().get(0));
+        bag.addItem(item.getMats().get(0));
+        bag.addItem(item.getMats().get(0));
+        bag.addItem(item.getMats().get(1));
+        bag.addItem(item.getMats().get(1));
+        bag.addItem(item.getMats().get(0));
+        bag.addItem(item.getMats().get(2));
+        bag.addItem(item.getMats().get(2));
+
+        int freqgold = Collections.frequency(bag.getMats(), new StoreItems("Gold", 750, "Holgrehenn Store", "Common"));
+        int freqmajwat = Collections.frequency(bag.getMats(), new StoreItems("Majestic Water", 100, "Holgrehenn Store", "Common"));
         
-        // Player player = new Player("Aldwin");
+        System.out.println(freqgold);
 
-        // player.addItemToBag(tuna);
-        // player.addItemToBag(tuna);
-
-        // player.addItemToBag(hill);
-        // player.addItemToBag(hill);
-        // player.checkBag();
-        // System.out.println("\n");
-        // player.removefromBag(player.getItem_id().get(1).getName());
-        // player.removefromBag(player.getItem_id().get(1).getName());
-        
-        //System.out.println(player.getBag());
-        // player.checkBag();
-        //player.checkBagString(1, tuna, player.getBag());
-        // player.removefromBag(player.getItem_id().get(1).getName());
-        // player.checkBag();
-
-        // System.out.println("os.name: " + System.getProperty("os.name"));
-
-        // String os_version = System.getProperty("os.name");
-
-        // if (os_version.equalsIgnoreCase("windows 11")) 
-        //     System.out.println("COLOR");
-        // else 
-        //     System.out.println("windows version outdated for color");
-
-
-        
-        
+        System.out.println(freqmajwat);
     }
-
 }
