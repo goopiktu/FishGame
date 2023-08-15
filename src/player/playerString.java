@@ -1,30 +1,9 @@
 package player;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import Locations.fishingSpot.Fishing_Spot;
-import materials.Materials;
 import potions.*;
 
 class playerString{
-
-    
-
-    public void checkBagString(int count, Materials m, ArrayList<Materials> bag){
-        
-        int string_length = 33;
-        char character_padding = ' ';
-
-        
-
-        String cat = "[" + count + "] " + m.getName() + " " + Collections.frequency(bag, m);
-        
-
-        String s = String.format("||  %" + (-string_length) + "s" + "||" , cat).replace(' ', character_padding);
-        
-        System.out.println(s);
-        //return bag;
-    }
 
     public void statusString(String name, String playerLocation, double money) {
         
@@ -60,7 +39,6 @@ class playerString{
                                  f.getFishes().get(0).getName());
         System.out.println(s);
     }
-
 
     public void craftPotionString(Potions potion) {
         String s = String.format("CONGRATULATIONS!! YOU CRAFTED %s", potion.getName());

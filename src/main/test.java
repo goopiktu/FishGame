@@ -1,5 +1,6 @@
 package main;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import bag.Bag;
@@ -29,8 +30,8 @@ public class test {
 
     private int[] index = {0, 0, 0, 0};
 
-
-    private void initializebag() {
+    @Before 
+    public void populateBag() {
         
         Materials[] mat = {gold, water, vinegar, basic_bait};
         for (int i = 0; i < this.index.length; i++) {
@@ -47,33 +48,48 @@ public class test {
     }
 
     @Test
-    public void frequency_test() {
-        initializebag();
+    public void frequency_test_gold() {
 
         int freqGold = Collections.frequency(bag.getMats(), new StoreItems("Gold", 750, "test", "Common"));
-        int freqWater = Collections.frequency(bag.getMats(), new StoreItems("Majestic Water", 100, "test", "Common"));
-        int freqVinegar = Collections.frequency(bag.getMats(), new StoreItems("Wondrous Vinegar", 150, "test", "Common"));
-        int freqBait = Collections.frequency(bag.getMats(), new Bait("Magical Bait", 300, "test", "Common", 2));
-
+            
         System.out.println("Frequency of gold: " + freqGold);
         System.out.println("Expected frequency: " + this.index[0]);
-
+    
+        assertEquals("They are equal", this.index[0], freqGold);
+    }
+    
+    
+    @Test
+    public void frequency_test_water() {
+        int freqWater = Collections.frequency(bag.getMats(), new StoreItems("Majestic Water", 100, "test", "Common"));
+        
         System.out.println("Frequency of Water: " + freqWater);
         System.out.println("Expected frequency: " + this.index[1]);
-
+        
+        assertEquals("They are equal", this.index[1], freqWater);
+    }
+    
+    @Test
+    public void frequency_test_vinegar() {
+        int freqVinegar = Collections.frequency(bag.getMats(), new StoreItems("Wondrous Vinegar", 150, "test", "Common"));
+        
         System.out.println("Frequency of Vinegar: " + freqVinegar);
         System.out.println("Expected frequency: " + this.index[2]);
-
+        
+        assertEquals("They are equal", this.index[2], freqVinegar);
+    }
+    
+    
+    @Test
+    public void frequency_test_bait() {
+        int freqBait = Collections.frequency(bag.getMats(), new Bait("Magical Bait", 300, "test", "Common", 2));
+        
         System.out.println("Frequency of Bait: " + freqBait);
         System.out.println("Expected frequency: " + this.index[3]);
-
-        assertEquals("They are equal", this.index[0], freqGold);
-        assertEquals("They are equal", this.index[1], freqWater);
-        assertEquals("They are equal", this.index[2], freqVinegar);
-        assertEquals("They are equal", this.index[3], freqBait);
         
-
+        assertEquals("They are equal", this.index[3], freqBait);
     }
+    
     // public static void main(String[] args) {
     //     Holgrehenn_Store item = new Holgrehenn_Store();
     //     Bag bag = new Bag();

@@ -130,6 +130,8 @@ public class MainMenu {
 			case 7: {
 				// System.out.println(Arrays.toString(player.bag.getBag().toArray()));
 				
+				player.bag.printBag();
+				
 				Choices(player, game); 
 				break;
 			}
@@ -176,7 +178,7 @@ public class MainMenu {
 			}
 			case 2: {
 				
-				player.bag.getBag().toString();
+				player.bag.printBag();
 				System.out.println("What do you want to sell:");
 				int index = Game.scInt();
 				System.out.println("How much do you want to sell:");

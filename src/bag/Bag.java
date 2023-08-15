@@ -1,10 +1,14 @@
 package bag;
 
 import java.util.ArrayList;
+import java.util.Collections;
 // import java.util.HashSet;
 // import java.util.List;
 // import java.util.Set;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
 
 import materials.Materials;
 
@@ -14,6 +18,7 @@ public class Bag {
 
     public Bag() {
         this.mats = new ArrayList<Materials>();
+        this.bag = new LinkedHashMap<Materials, Integer>();
     }
 
     public ArrayList<Materials> getMats() {
@@ -24,20 +29,19 @@ public class Bag {
         return bag;
     }
 
-    public ArrayList<Materials> getMaterials() {
-        return mats;
-    }
-
     public void setMaterials(ArrayList<Materials> mats) {
         this.mats = mats;
+        setBag(this.mats);
     }
 
     public void removeItem(Materials item) {
         mats.remove(item);
+        setBag(mats);
     }
 
     public void addItem(Materials item) {
         mats.add(item);
+        setBag(mats);
     }
 
     public boolean contains(Materials item) {
@@ -47,9 +51,41 @@ public class Bag {
         return false;
     }
 
+
+    public void setBag(ArrayList<Materials> mats)  {
+        
+        // this makes it so that i know all the materials without duplicates
+        Set<Materials> uniqueItems = new LinkedHashSet<Materials>();
+        uniqueItems.addAll(mats);
+
+        int size = uniqueItems.size();
+        int frequency = 0;
+
+        Materials[] arrayUniqueItems = new Materials[size];
+        arrayUniqueItems = uniqueItems.toArray(arrayUniqueItems);
+
+        for (int i = 0; i < size; i++) {
+            frequency = Collections.frequency(this.getMats(), arrayUniqueItems[i]);
+            System.out.println(frequency);
+            this.bag.put(arrayUniqueItems[i], frequency);
+        }
+    }
     
-
-
+    public void printBag() {
+        String spacer = "Items";
+        System.out.printf("+=========================================+\n");
+        System.out.printf( "|| %-33s Qty ||\n", spacer);
+        for (Map.Entry<Materials, Integer>bag: this.bag.entrySet()) {
+            // System.out.println(bag.getKey().getName() + " : " + bag.getValue());
+            
+            System.out.printf("|| %-35s%d  ||\n", bag.getKey().getName(), bag.getValue());
+        }
+        System.out.printf("+=========================================+\n");
+    }
+    // @Override
+    // public String toString() {
+        
+    // }
 
     // need to make the bag a hashmap instead of a arraylist since 
     // i need to count how many occurences there are for each item
