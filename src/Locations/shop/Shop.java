@@ -1,6 +1,7 @@
 package Locations.shop;
-import materials.Materials;
 import java.util.ArrayList;
+
+import items.materials.Materials;
 
 public class Shop {
     private String name;

@@ -1,8 +1,9 @@
-package Locations.shop;
+package Locations.shop.shops;
 
 
-import materials.Bait;
-import materials.StoreItems;
+import Locations.shop.Shop;
+import items.materials.Bait;
+import items.materials.StoreItems;
 
 public class Holgrehenn_Store extends Shop{
     public Holgrehenn_Store() {

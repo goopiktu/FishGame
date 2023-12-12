@@ -6,16 +6,15 @@ import java.util.HashMap;
 import java.util.Random;
 
 import Locations.fishingSpot.Fishing_Spot;
-import Locations.shop.Holgrehenn_Store;
-import materials.Materials;
-import potions.Potions;
-import bag.Bag;
+import Locations.shop.Shop;
+import items.materials.Materials;
+import items.potions.Potions;
 
 
 public class Player extends playerString{
 	
 	private String name;
-	private double money;
+	private float money;
 	private String playerLocation;
 	public Bag bag;
 	private HashMap<Integer, Materials> item_id;
@@ -53,11 +52,11 @@ public class Player extends playerString{
 		this.name = name;
 	}
 
-	public double getMoney() {
+	public float getMoney() {
 		return money;
 	}
 
-	public void setMoney(double money) {
+	public void setMoney(float money) {
 		this.money = money;
 	}
 
@@ -110,7 +109,7 @@ public class Player extends playerString{
 		return false;
 	}
 	
-	public void buy(Materials materials, Player player, Holgrehenn_Store shop, int qty) {
+	public void buy(Materials materials, Player player, Shop shop, int qty) {
 		if (! player.playerLocation.equals(shop.getName()) || player.getMoney() < materials.getPrice())
 			return;
 		subMoney(materials.getPrice() * qty);  
@@ -124,12 +123,12 @@ public class Player extends playerString{
 	}
 	
 
-	private void subMoney(double money) {
+	private void subMoney(float money) {
 		this.money -= money;
 	}
 
 
-	public void sell(Materials materials, Player player, Holgrehenn_Store shop, int qty) {
+	public void sell(Materials materials, Player player, Shop shop, int qty) {
 		
 		
 		if (! player.playerLocation.equals(shop.getName()))
@@ -139,7 +138,7 @@ public class Player extends playerString{
 
 	}
 
-	public void addMoney(double money){
+	public void addMoney(float money){
 		this.money += money;
 	}
 

@@ -2,5 +2,9 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "c:\\Users\\aldwi\\College\\jar_files\\lanterna-3.2.0-alpha1.jar"
+    ],
+    "java.project.sourcePaths": [
+        "test",
+        "src"
     ]
 }

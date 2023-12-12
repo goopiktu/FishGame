@@ -1,6 +1,6 @@
 package Locations.fishingSpot;
 
-import materials.Fish;
+import items.materials.Fish;
 
 public class Taal_Lake extends Fishing_Spot {
 

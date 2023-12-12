@@ -3,53 +3,67 @@ package main;
 import java.util.Scanner;
 import Locations.fishingSpot.*;
 import Locations.*;
-import Locations.shop.*;
+import Locations.shop.shops.Holgrehenn_Store;
+import items.potions.potion_types.*;
 import mainMenu.MainMenu;
-import potions.*;
 
 //import player.Player;
-
 public class Game {
-	//boolean run = true;
-	static Scanner sc = new Scanner(System.in);
-	private boolean keepRunning = true;
+    static Scanner sc = new Scanner(System.in);
+    private boolean keepRunning = true;
 
-	private Taal_Lake taalLake;
-	private Galathea_Deep galatheaDeep;
-	private Dagupan_Mangrove_Forests mangroveForests;
-	private Mindanao_Current mindanaoCurrent;
-	private Holgrehenn_Store holgrehennStore;
-	private Town geffenTown;
-	private MainMenu menu;
-	private Air_Potion airPotion;
-	private Earth_Potion earthPotion;
-	private Fire_Potion firePotion;
-	private Water_Potion waterPotion;
+    private Taal_Lake taalLake;
+    private Galathea_Deep galatheaDeep;
+    private Dagupan_Mangrove_Forests mangroveForests;
+    private Mindanao_Current mindanaoCurrent;
+    private Holgrehenn_Store holgrehennStore;
+    private Town geffenTown;
+    private MainMenu menu;
+    private Air_Potion airPotion;
+    private Earth_Potion earthPotion;
+    private Fire_Potion firePotion;
+    private Water_Potion waterPotion;
 
-	public Game() {
-		initClasses();
-	}
+    public Game(
+        Taal_Lake taalLake,
+        Galathea_Deep galatheaDeep,
+        Dagupan_Mangrove_Forests mangroveForests,
+        Mindanao_Current mindanaoCurrent,
+        Holgrehenn_Store holgrehennStore,
+        Town geffenTown,
+        Air_Potion airPotion,
+        Earth_Potion earthPotion,
+        Fire_Potion firePotion,
+        Water_Potion waterPotion
+    ) {
+        this.taalLake = taalLake;
+        this.galatheaDeep = galatheaDeep;
+        this.mangroveForests = mangroveForests;
+        this.mindanaoCurrent = mindanaoCurrent;
+        this.holgrehennStore = holgrehennStore;
+        this.geffenTown = geffenTown;
+        this.airPotion = airPotion;
+        this.earthPotion = earthPotion;
+        this.firePotion = firePotion;
+        this.waterPotion = waterPotion;
+        this.menu = new MainMenu(this);
+    }
 
-	public void initClasses() {
-		taalLake = new Taal_Lake();
-		galatheaDeep = new Galathea_Deep();
-		mangroveForests = new Dagupan_Mangrove_Forests();
-		mindanaoCurrent = new Mindanao_Current();
-		holgrehennStore = new Holgrehenn_Store();
-		geffenTown = new Town();
-		airPotion = new Air_Potion("Air Potion", mindanaoCurrent, holgrehennStore);
-		earthPotion = new Earth_Potion("Earth Potion", mangroveForests, holgrehennStore);
-		firePotion = new Fire_Potion("Fire Potion", taalLake, holgrehennStore);
-		waterPotion = new Water_Potion("Water Potion", galatheaDeep, holgrehennStore);
-		menu = new MainMenu(this);
-		
-		
-	}
-	
-	public static void main(String[] args) {
-		//new init();
-		new Game();
-	}
+    public static void main(String[] args) {
+        // Create instances for each component and pass them to the Game constructor
+        new Game(
+            new Taal_Lake(),
+            new Galathea_Deep(),
+            new Dagupan_Mangrove_Forests(),
+            new Mindanao_Current(),
+            new Holgrehenn_Store(),
+            new Town(),
+            new Air_Potion(),
+            new Earth_Potion(),
+            new Fire_Potion(),
+            new Water_Potion()
+        );
+    }
 	
 	public boolean getkeepRunning() {
 		return keepRunning;

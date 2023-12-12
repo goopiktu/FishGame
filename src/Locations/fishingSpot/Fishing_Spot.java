@@ -2,7 +2,7 @@ package Locations.fishingSpot;
 
 import java.util.ArrayList;
 
-import materials.Fish;
+import items.materials.Fish;
 
 
 /**

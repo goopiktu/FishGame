@@ -1,7 +1,7 @@
 package player;
 
 import Locations.fishingSpot.Fishing_Spot;
-import potions.*;
+import items.potions.*;
 
 class playerString{
 

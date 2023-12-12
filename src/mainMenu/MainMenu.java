@@ -2,15 +2,17 @@ package mainMenu;
 
 
 import Locations.fishingSpot.*;
-import Locations.shop.Holgrehenn_Store;
+import Locations.shop.ShopMenuHandler;
 import main.Game;
 import player.Player;
 
 
 public class MainMenu {
-	
+	private ShopMenuHandler shopMenuHandler;
 
 	public MainMenu(Game game) {
+		shopMenuHandler = new ShopMenuHandler(game.getHolgrehennStore());
+		
 		start(game);
 	}
 	
@@ -104,7 +106,8 @@ public class MainMenu {
 			}
 			case 2: {
 				player.setPlayerLocation(game.getHolgrehennStore().getName()); 
-				shopChoice(player, game.getHolgrehennStore(), game);
+				shopMenuHandler.shopChoice(player, game);
+				// shopMenuHandler.shopChoice(player, game.getHolgrehennStore(), game);
 				break;
 			}
 			case 3: {
@@ -144,56 +147,6 @@ public class MainMenu {
 				//throw new IllegalArgumentException("Unexpected value: " + input);
 		}
 		
-	}
-
-	private void shopChoice(Player player, Holgrehenn_Store store, Game game) {
-		player.status();
-		System.out.println("[1] Buy");
-		System.out.println("[2] Sell");
-		System.out.println("[x] Go back");
-		
-		int input = Game.scInt();
-		Game.scStr();
-		shopMenu(player, input, store, game);
-	}
-
-	private void shopMenu(Player player, int input, Holgrehenn_Store store, Game game) {
-		
-		
-		
-		switch (input) {
-			case 1: {
-				
-				store.showShop();
-				System.out.println("What do you want to buy:");
-				int index = Game.scInt() - 1;
-				System.out.println("How much do you want to buy:");
-				int qty = Game.scInt();
-				Game.scStr();
-				
-				
-				player.buy(store.getMats().get(index), player, store, qty);
-				Choices(player, game);
-				break;
-			}
-			case 2: {
-				
-				player.bag.printBag();
-				System.out.println("What do you want to sell:");
-				int index = Game.scInt();
-				System.out.println("How much do you want to sell:");
-				int qty = Game.scInt();
-				Game.scStr();
-
-			
-				player.sell(player.getItem_id().get(index), player, store, qty);
-				Choices(player, game);
-				break;
-			}
-			default:
-				Choices(player, game); 
-		}
-
 	}
 
 	private void fishChoice(Player player, Fishing_Spot fspot, Game game) {

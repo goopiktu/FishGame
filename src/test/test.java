@@ -1,10 +1,10 @@
-package main;
+package test;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import bag.Bag;
-import materials.*;
+import items.materials.*;
+import player.Bag;
 
 import static org.junit.Assert.assertEquals;
 
@@ -50,7 +50,7 @@ public class test {
     @Test
     public void frequency_test_gold() {
 
-        int freqGold = Collections.frequency(bag.getMats(), new StoreItems("Gold", 750, "test", "Common"));
+        int freqGold = Collections.frequency(bag.getItems(), new StoreItems("Gold", 750, "test", "Common"));
             
         System.out.println("Frequency of gold: " + freqGold);
         System.out.println("Expected frequency: " + this.index[0]);
@@ -61,7 +61,7 @@ public class test {
     
     @Test
     public void frequency_test_water() {
-        int freqWater = Collections.frequency(bag.getMats(), new StoreItems("Majestic Water", 100, "test", "Common"));
+        int freqWater = Collections.frequency(bag.getItems(), new StoreItems("Majestic Water", 100, "test", "Common"));
         
         System.out.println("Frequency of Water: " + freqWater);
         System.out.println("Expected frequency: " + this.index[1]);
@@ -71,7 +71,7 @@ public class test {
     
     @Test
     public void frequency_test_vinegar() {
-        int freqVinegar = Collections.frequency(bag.getMats(), new StoreItems("Wondrous Vinegar", 150, "test", "Common"));
+        int freqVinegar = Collections.frequency(bag.getItems(), new StoreItems("Wondrous Vinegar", 150, "test", "Common"));
         
         System.out.println("Frequency of Vinegar: " + freqVinegar);
         System.out.println("Expected frequency: " + this.index[2]);
@@ -82,7 +82,7 @@ public class test {
     
     @Test
     public void frequency_test_bait() {
-        int freqBait = Collections.frequency(bag.getMats(), new Bait("Magical Bait", 300, "test", "Common", 2));
+        int freqBait = Collections.frequency(bag.getItems(), new Bait("Magical Bait", 300, "test", "Common", 2));
         
         System.out.println("Frequency of Bait: " + freqBait);
         System.out.println("Expected frequency: " + this.index[3]);

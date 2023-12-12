@@ -1,4 +1,4 @@
-package bag;
+package player;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,65 +7,65 @@ import java.util.Collections;
 // import java.util.Set;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
-import java.util.Map;
 import java.util.Set;
+import java.util.Map.Entry;
 
-import materials.Materials;
+import items.Item;
 
 public class Bag {
-    private LinkedHashMap<Materials, Integer> bag;
-    private ArrayList<Materials> mats;
+    private LinkedHashMap<Item, Integer> bag;
+    private ArrayList<Item> items;
 
     public Bag() {
-        this.mats = new ArrayList<Materials>();
-        this.bag = new LinkedHashMap<Materials, Integer>();
+        this.items = new ArrayList<Item>();
+        this.bag = new LinkedHashMap<Item, Integer>();
     }
 
-    public ArrayList<Materials> getMats() {
-        return mats;
+    public ArrayList<Item> getItems() {
+        return items;
     }
 
-    public LinkedHashMap<Materials, Integer> getBag() {
+    public LinkedHashMap<Item, Integer> getBag() {
         return bag;
     }
 
-    public void setMaterials(ArrayList<Materials> mats) {
-        this.mats = mats;
-        setBag(this.mats);
+    public void setMaterials(ArrayList<Item> item) {
+        this.items = item;
+        setBag(items);
     }
 
-    public void removeItem(Materials item) {
-        mats.remove(item);
-        setBag(mats);
+    public void removeItem(Item item) {
+        this.items.remove(item);
+        setBag(items);
     }
 
-    public void addItem(Materials item) {
-        mats.add(item);
-        setBag(mats);
+    public void addItem(Item item) {
+        this.items.add(item);
+        setBag(items);
     }
 
-    public boolean contains(Materials item) {
-        if(mats.contains(item)) {
+    public boolean contains(Item item) {
+        if(items.contains(item)) {
             return true;
         }
         return false;
     }
 
 
-    public void setBag(ArrayList<Materials> mats)  {
+    public void setBag(ArrayList<Item> item)  {
         
         // this makes it so that i know all the materials without duplicates
-        Set<Materials> uniqueItems = new LinkedHashSet<Materials>();
-        uniqueItems.addAll(mats);
+        Set<Item> uniqueItems = new LinkedHashSet<Item>();
+        uniqueItems.addAll(item);
 
         int size = uniqueItems.size();
         int frequency = 0;
 
-        Materials[] arrayUniqueItems = new Materials[size];
+        Item[] arrayUniqueItems = new Item[size];
         arrayUniqueItems = uniqueItems.toArray(arrayUniqueItems);
 
         for (int i = 0; i < size; i++) {
-            frequency = Collections.frequency(this.getMats(), arrayUniqueItems[i]);
+            frequency = Collections.frequency(this.getItems(), arrayUniqueItems[i]);
             System.out.println(frequency);
             this.bag.put(arrayUniqueItems[i], frequency);
         }
@@ -75,7 +75,7 @@ public class Bag {
         String spacer = "Items";
         System.out.printf("+=========================================+\n");
         System.out.printf( "|| %-33s Qty ||\n", spacer);
-        for (Map.Entry<Materials, Integer>bag: this.bag.entrySet()) {
+        for (Entry<Item, Integer> bag: this.bag.entrySet()) {
             // System.out.println(bag.getKey().getName() + " : " + bag.getValue());
             
             System.out.printf("|| %-35s%d  ||\n", bag.getKey().getName(), bag.getValue());
