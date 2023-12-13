@@ -2,9 +2,9 @@ package items.potions;
 
 import java.util.ArrayList;
 
-import items.materials.Materials;
 import player.Player;
 import items.Item;
+import items.material.Materials;
 
 
 public abstract class Potions extends Item{
@@ -71,12 +71,6 @@ public abstract class Potions extends Item{
         val += increase;
         return val;
     }
-
-    @Override
-    public void use() {
-        throw new UnsupportedOperationException("Unimplemented method 'use'");
-    }
-
-    // public abstract void 
+    
     
 }

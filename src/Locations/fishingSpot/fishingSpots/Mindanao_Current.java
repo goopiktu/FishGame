@@ -1,6 +1,7 @@
-package Locations.fishingSpot;
+package Locations.fishingSpot.fishingSpots;
 
-import items.materials.Fish;
+import Locations.fishingSpot.Fishing_Spot;
+import items.material.materials.Fish;
 
 /**
  * Mindanao_Current

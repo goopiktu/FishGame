@@ -1,9 +1,9 @@
 package items.potions.potion_types;
 
-import Locations.fishingSpot.Galathea_Deep;
+import Locations.fishingSpot.fishingSpots.Galathea_Deep;
 import Locations.shop.Shop;
-import items.materials.Fish;
-import items.materials.StoreItems;
+import items.material.materials.Fish;
+import items.material.materials.StoreItems;
 import items.potions.Potions;
 
 public class Water_Potion extends Potions{

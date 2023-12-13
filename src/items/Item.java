@@ -1,6 +1,6 @@
 package items;
 
-import items.materials.Materials;
+import items.material.Materials;
 
 public abstract class Item {
     protected String name;
@@ -27,9 +27,7 @@ public abstract class Item {
         return price;
     }
 
-    public abstract void use();
-
-     @Override 
+    @Override
     public boolean equals(Object o) {
             if(o == this)
                 return true;
@@ -40,7 +38,7 @@ public abstract class Item {
             Materials c = (Materials) o;
                 
             return Double.compare(c.price, this.price) == 0 &&
-                                c.name == this.name;
+                                  c.name == this.name;
                 
 
     }

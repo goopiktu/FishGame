@@ -1,4 +1,6 @@
-package items.materials;
+package items.material.materials;
+
+import items.material.Materials;
 
 public class Bait extends Materials {
     
@@ -16,11 +18,5 @@ public class Bait extends Materials {
 
     public void setChance(int chance) {
         this.chance = chance;
-    }
-
-    @Override
-    public void use() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'use'");
     }
 }

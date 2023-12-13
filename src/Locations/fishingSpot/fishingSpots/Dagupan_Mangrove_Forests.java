@@ -1,6 +1,7 @@
-package Locations.fishingSpot;
+package Locations.fishingSpot.fishingSpots;
 
-import items.materials.Fish;
+import Locations.fishingSpot.Fishing_Spot;
+import items.material.materials.Fish;
 
 public class Dagupan_Mangrove_Forests extends Fishing_Spot{
     public Dagupan_Mangrove_Forests() {

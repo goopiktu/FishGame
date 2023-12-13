@@ -1,9 +1,9 @@
 package main;
 
 import java.util.Scanner;
-import Locations.fishingSpot.*;
-import Locations.*;
+import Locations.fishingSpot.fishingSpots.*;
 import Locations.shop.shops.Holgrehenn_Store;
+import Locations.town.Town;
 import items.potions.potion_types.*;
 import mainMenu.MainMenu;
 

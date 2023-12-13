@@ -7,7 +7,7 @@ import java.util.Random;
 
 import Locations.fishingSpot.Fishing_Spot;
 import Locations.shop.Shop;
-import items.materials.Materials;
+import items.material.Materials;
 import items.potions.Potions;
 
 
@@ -127,10 +127,13 @@ public class Player extends playerString{
 		this.money -= money;
 	}
 
+	public void addMoney(float money){
+		this.money += money;
+	}
+
+
 
 	public void sell(Materials materials, Player player, Shop shop, int qty) {
-		
-		
 		if (! player.playerLocation.equals(shop.getName()))
 			return;
 		
@@ -138,10 +141,7 @@ public class Player extends playerString{
 
 	}
 
-	public void addMoney(float money){
-		this.money += money;
-	}
-
+	
 	public void removeItemsFromBag(Materials materials, int qty, Player player) {
 		for (int i = 0; i < qty; i++) {
 			addMoney(materials.getPrice());
@@ -170,7 +170,9 @@ public class Player extends playerString{
 	}
 	
 	
-	
+	public void usePotion(Potions potion) {
+
+	}
 	
 	
 }

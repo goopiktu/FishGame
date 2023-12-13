@@ -1,9 +1,9 @@
 package items.potions.potion_types;
 
-import Locations.fishingSpot.Taal_Lake;
+import Locations.fishingSpot.fishingSpots.Taal_Lake;
 import Locations.shop.Shop;
-import items.materials.Fish;
-import items.materials.StoreItems;
+import items.material.materials.Fish;
+import items.material.materials.StoreItems;
 import items.potions.Potions;
 
 /**

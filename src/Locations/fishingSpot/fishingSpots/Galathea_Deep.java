@@ -1,6 +1,7 @@
-package Locations.fishingSpot;
+package Locations.fishingSpot.fishingSpots;
 
-import items.materials.Fish;
+import Locations.fishingSpot.Fishing_Spot;
+import items.material.materials.Fish;
 
 public class Galathea_Deep extends Fishing_Spot{
     public Galathea_Deep() {

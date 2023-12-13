@@ -2,8 +2,8 @@ package items.potions.potion_types;
 
 import Locations.fishingSpot.Fishing_Spot;
 import Locations.shop.Shop;
-import items.materials.Fish;
-import items.materials.StoreItems;
+import items.material.materials.Fish;
+import items.material.materials.StoreItems;
 import items.potions.Potions;
 
 public class Air_Potion extends Potions{
@@ -26,7 +26,5 @@ public class Air_Potion extends Potions{
         addRecipe(new StoreItems("Wondrous Vinegar", 150, "Shop", "Common"));
         setPrice();
     }
-
     
-
 }

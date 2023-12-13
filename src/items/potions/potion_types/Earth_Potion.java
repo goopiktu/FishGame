@@ -1,9 +1,9 @@
 package items.potions.potion_types;
 
-import Locations.fishingSpot.Dagupan_Mangrove_Forests;
+import Locations.fishingSpot.fishingSpots.Dagupan_Mangrove_Forests;
 import Locations.shop.Shop;
-import items.materials.Fish;
-import items.materials.StoreItems;
+import items.material.materials.Fish;
+import items.material.materials.StoreItems;
 import items.potions.Potions;
 
 public class Earth_Potion extends Potions{

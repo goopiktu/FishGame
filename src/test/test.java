@@ -3,7 +3,9 @@ package test;
 import org.junit.Before;
 import org.junit.Test;
 
-import items.materials.*;
+import items.material.*;
+import items.material.materials.Bait;
+import items.material.materials.StoreItems;
 import player.Bag;
 
 import static org.junit.Assert.assertEquals;

@@ -11,14 +11,6 @@ public class ShopMenuHandler {
         this.shop = shop;
     }
 
-    public void showShoppingMenu() {
-        
-    }
-
-    public void handleShoppingInput(int input, Player player, Game game) {
-        
-    }
-
     public void shopChoice(Player player, Game game) {
 		player.status();
 		System.out.println("[1] Buy");
@@ -31,9 +23,6 @@ public class ShopMenuHandler {
 	}
 
 	public void shopMenu(Player player, int input, Game game) {
-		
-		
-		
 		switch (input) {
 			case 1: {
 				this.shop.showShop();
@@ -43,9 +32,7 @@ public class ShopMenuHandler {
 				int qty = Game.scInt();
 				Game.scStr();
 				
-				
 				player.buy(this.shop.getMats().get(index), player, this.shop, qty);
-				// Choices(player, game);
 				break;
 			}
 			case 2: {
@@ -57,9 +44,7 @@ public class ShopMenuHandler {
 				int qty = Game.scInt();
 				Game.scStr();
 
-			
 				player.sell(player.getItem_id().get(index), player, this.shop, qty);
-				// Choices(player, game);
 				break;
 			}
 		}
