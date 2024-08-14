@@ -25,17 +25,16 @@ public class Game {
     private Water_Potion waterPotion;
 
     public Game(
-        Taal_Lake taalLake,
-        Galathea_Deep galatheaDeep,
-        Dagupan_Mangrove_Forests mangroveForests,
-        Mindanao_Current mindanaoCurrent,
-        Holgrehenn_Store holgrehennStore,
-        Town geffenTown,
-        Air_Potion airPotion,
-        Earth_Potion earthPotion,
-        Fire_Potion firePotion,
-        Water_Potion waterPotion
-    ) {
+            Taal_Lake taalLake,
+            Galathea_Deep galatheaDeep,
+            Dagupan_Mangrove_Forests mangroveForests,
+            Mindanao_Current mindanaoCurrent,
+            Holgrehenn_Store holgrehennStore,
+            Town geffenTown,
+            Air_Potion airPotion,
+            Earth_Potion earthPotion,
+            Fire_Potion firePotion,
+            Water_Potion waterPotion) throws InterruptedException {
         this.taalLake = taalLake;
         this.galatheaDeep = galatheaDeep;
         this.mangroveForests = mangroveForests;
@@ -49,83 +48,79 @@ public class Game {
         this.menu = new MainMenu(this);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         // Create instances for each component and pass them to the Game constructor
         new Game(
-            new Taal_Lake(),
-            new Galathea_Deep(),
-            new Dagupan_Mangrove_Forests(),
-            new Mindanao_Current(),
-            new Holgrehenn_Store(),
-            new Town(),
-            new Air_Potion(),
-            new Earth_Potion(),
-            new Fire_Potion(),
-            new Water_Potion()
-        );
+                new Taal_Lake(),
+                new Galathea_Deep(),
+                new Dagupan_Mangrove_Forests(),
+                new Mindanao_Current(),
+                new Holgrehenn_Store(),
+                new Town(),
+                new Air_Potion(),
+                new Earth_Potion(),
+                new Fire_Potion(),
+                new Water_Potion());
     }
-	
-	public boolean getkeepRunning() {
-		return keepRunning;
-	}
 
-	public void setkeepRunning(boolean keepRunning) {
-		this.keepRunning = keepRunning;
-	}
+    public boolean getkeepRunning() {
+        return keepRunning;
+    }
 
-	
-	public static String scStr() {
-		return sc.nextLine();
-	}
+    public void setkeepRunning(boolean keepRunning) {
+        this.keepRunning = keepRunning;
+    }
 
-	public static int scInt() {
-		return sc.nextInt();
-	}
+    public static String scStr() {
+        return sc.nextLine();
+    }
 
-	
+    public static int scInt() {
+        return sc.nextInt();
+    }
 
-	public Air_Potion getAirPotion() {
-		return airPotion;
-	}
+    public Air_Potion getAirPotion() {
+        return airPotion;
+    }
 
-	public Earth_Potion getEarthPotion() {
-		return earthPotion;
-	}
+    public Earth_Potion getEarthPotion() {
+        return earthPotion;
+    }
 
-	public Fire_Potion getFirePotion() {
-		return firePotion;
-	}
+    public Fire_Potion getFirePotion() {
+        return firePotion;
+    }
 
-	public Water_Potion getWaterPotion() {
-		return waterPotion;
-	}
+    public Water_Potion getWaterPotion() {
+        return waterPotion;
+    }
 
-	public Taal_Lake getTaalLake() {
-		return taalLake;
-	}
+    public Taal_Lake getTaalLake() {
+        return taalLake;
+    }
 
-	public Galathea_Deep getGalatheaDeep() {
-		return galatheaDeep;
-	}
+    public Galathea_Deep getGalatheaDeep() {
+        return galatheaDeep;
+    }
 
-	public Dagupan_Mangrove_Forests getMangroveForests() {
-		return mangroveForests;
-	}
+    public Dagupan_Mangrove_Forests getMangroveForests() {
+        return mangroveForests;
+    }
 
-	public Mindanao_Current getMindanaoCurrent() {
-		return mindanaoCurrent;
-	}
+    public Mindanao_Current getMindanaoCurrent() {
+        return mindanaoCurrent;
+    }
 
-	public Holgrehenn_Store getHolgrehennStore() {
-		return holgrehennStore;
-	}
+    public Holgrehenn_Store getHolgrehennStore() {
+        return holgrehennStore;
+    }
 
-	public Town getGeffenTown() {
-		return geffenTown;
-	}
+    public Town getGeffenTown() {
+        return geffenTown;
+    }
 
-	public MainMenu getMenu() {
-		return menu;
-	}
-	
+    public MainMenu getMenu() {
+        return menu;
+    }
+
 }

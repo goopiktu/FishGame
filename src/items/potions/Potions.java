@@ -6,15 +6,14 @@ import player.Player;
 import items.Item;
 import items.material.Materials;
 
-
-public abstract class Potions extends Item{
+public abstract class Potions extends Item {
 
     // private String name;
     private ArrayList<Materials> recipe;
 
     public Potions(String name) {
         super(name, 0);
-        this.recipe = new ArrayList<Materials>(); 
+        this.recipe = new ArrayList<Materials>();
     }
 
     public String getName() {
@@ -35,30 +34,35 @@ public abstract class Potions extends Item{
 
     public void addRecipe(Materials mat) {
         recipe.add(mat);
-    } 
+    }
 
-    public void showRecipe(Player player) {
+    public void showRecipe(Player player) throws InterruptedException {
 
         int recipe_counter = 0;
         int player_material_counter = 0;
 
         System.out.println("\nCrafting Recipe:");
-        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        
-        String s = String.format("+  %-20s\t%-5s\t\t%-26s\t%-20s+\n", "Name", "Price", "Location", "Rareity");        
-      
+        System.out.println(
+                "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
+        String s = String.format("+\t%-20s\t%-5s\t\t%-20s\t %-15s + %5s\n", "Name", "Location", "Rareity", "Price",
+                "Inventory|Required");
+
         System.out.print(s);
-        System.out.println("+\t\t\t\t\t\t\t\t\t\t\t    +");
+        System.out.println("+\t\t\t\t\t\t\t\t\t\t\t\t +      \t|\tRequired+");
         for (Materials materials : recipe) {
-            if(player.bag.contains(materials)) 
+            if (player.bag.contains(materials))
                 player_material_counter++;
 
-            System.out.println("+  " + materials.toString()+ "+  " +  player_material_counter +"/"+ recipe_counter + "  +");
+            String stringRecipe = String.format("+\t%s +\t%-6d %-6s %-6d +",
+                    materials.toString(), player_material_counter, "|", recipe_counter);
 
-            
+            System.out.println(stringRecipe);
+
         }
-        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
-        // \t \t \t
+        System.out.println(
+                "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+        Thread.sleep(2000);
     }
 
     public float setPrice() {
@@ -71,6 +75,5 @@ public abstract class Potions extends Item{
         val += increase;
         return val;
     }
-    
-    
+
 }
