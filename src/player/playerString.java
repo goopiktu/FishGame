@@ -6,25 +6,11 @@ import items.potions.*;
 class playerString {
 
     public void statusString(String name, String playerLocation, double money) {
-
-        int string_length = 35;
-        char character_padding = ' ';
-        name = "Name: " + name;
-        playerLocation = "Location: " + playerLocation;
-        String money_string = "Money: " + money;
-
-        String n = String.format("|  %" + (-string_length) + "s" + "|\n", name).replace(' ', character_padding);
-
-        String p = String.format("|  %" + (-string_length) + "s" + "|\n", playerLocation).replace(' ',
-                character_padding);
-
-        String m = String.format("|  %" + (-string_length) + "s" + "|", money_string).replace(' ', character_padding);
-
-        String s = n + p + m;
-
-        System.out.println("---------------------------------------");
-        System.out.println(s);
-        System.out.println("---------------------------------------");
+        System.out.format("+------------------------------------------+\n");
+        System.out.format("|  NAME      |  %-25s  |\n", name);
+        System.out.format("|  LOCATION  |  %-25s  |\n", playerLocation);
+        System.out.format("|  MONEY     |  %25.3f  |\n", money);
+        System.out.format("+------------------------------------------+\n");
     }
 
     public void fishCaughtCommonString(Fishing_Spot f) {

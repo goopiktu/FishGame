@@ -1,7 +1,12 @@
 package items.potions;
 
 import java.util.ArrayList;
-
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map.Entry;
+import player.Bag;
 import player.Player;
 import items.Item;
 import items.material.Materials;
@@ -10,10 +15,12 @@ public abstract class Potions extends Item {
 
     // private String name;
     private ArrayList<Materials> recipe;
+    private LinkedHashMap<Materials, Integer> uniqueRecipe;
 
     public Potions(String name) {
         super(name, 0);
         this.recipe = new ArrayList<Materials>();
+        this.uniqueRecipe = new LinkedHashMap<Materials, Integer>();
     }
 
     public String getName() {
@@ -30,39 +37,57 @@ public abstract class Potions extends Item {
 
     public void setRecipe(ArrayList<Materials> recipe) {
         this.recipe = recipe;
+        setUniqueRecipe(recipe);
     }
 
     public void addRecipe(Materials mat) {
-        recipe.add(mat);
+        this.recipe.add(mat);
+        setUniqueRecipe(recipe);
+    }
+
+    public void setUniqueRecipe(ArrayList<Materials> materials) {
+
+        // this makes it so that i know all the materials without duplicates
+        Set<Materials> uniqueItems = new LinkedHashSet<Materials>();
+        uniqueItems.addAll(materials);
+
+        int size = uniqueItems.size();
+        int frequency = 0;
+
+        Materials[] arrayUniqueItems = new Materials[size];
+        arrayUniqueItems = uniqueItems.toArray(arrayUniqueItems);
+
+        for (int i = 0; i < size; i++) {
+            frequency = Collections.frequency(this.getRecipe(), arrayUniqueItems[i]);
+            this.uniqueRecipe.put(arrayUniqueItems[i], frequency);
+        }
     }
 
     public void showRecipe(Player player) throws InterruptedException {
 
-        int recipe_counter = 0;
         int player_material_counter = 0;
-
         System.out.println("\nCrafting Recipe:");
-        System.out.println(
-                "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
-        String s = String.format("+\t%-20s\t%-5s\t\t%-20s\t %-15s + %5s\n", "Name", "Location", "Rareity", "Price",
-                "Inventory|Required");
+        // Name Location Rareity Pricee
+        String potionString = "| %-20s | %-3d | %-3d |\n";
 
-        System.out.print(s);
-        System.out.println("+\t\t\t\t\t\t\t\t\t\t\t\t +      \t|\tRequired+");
-        for (Materials materials : recipe) {
-            if (player.bag.contains(materials))
-                player_material_counter++;
+        System.out.format(
+                "+----------------------+---------------------------+----------------------+-----------------------+-----+-----+\n");
+        System.out.format(
+                "|  NAME                |  LOCATION                 |  RAREITY             |  PRICE                | INV | REQ |\n");
+        System.out.format(
+                "+----------------------+---------------------------+----------------------+-----------------------+-----+-----+\n");
 
-            String stringRecipe = String.format("+\t%s +\t%-6d %-6s %-6d +",
-                    materials.toString(), player_material_counter, "|", recipe_counter);
+        for (Entry<Materials, Integer> uniqueRecipe : this.uniqueRecipe.entrySet()) {
+            // if (player.bag.contains(materials))
+            // player_material_counter++;
 
-            System.out.println(stringRecipe);
+            System.out.format(potionString, uniqueRecipe.getKey(), player_material_counter,
+                    uniqueRecipe.getValue());
 
         }
-        System.out.println(
-                "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
-        Thread.sleep(2000);
+        System.out.format(
+                "+----------------------+---------------------------+----------------------+-----------------------+-----+-----+\n");
     }
 
     public float setPrice() {

@@ -158,6 +158,7 @@ public class Player extends playerString {
 		} else {
 			System.out.println("not enough items to craft potion");
 		}
+
 		Thread.sleep(3000);
 	}
 

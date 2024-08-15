@@ -6,7 +6,7 @@ import items.material.materials.Fish;
 import items.material.materials.StoreItems;
 import items.potions.Potions;
 
-public class Earth_Potion extends Potions{
+public class Earth_Potion extends Potions {
 
     public Earth_Potion() {
         super("Earth Potion");
@@ -16,8 +16,6 @@ public class Earth_Potion extends Potions{
         addRecipe(new StoreItems("Wondrous Vinegar", 150, "Shop", "Common"));
         setPrice();
     }
-
-
 
     public Earth_Potion(String name, Dagupan_Mangrove_Forests mangrove, Shop shop) {
         super(name);

@@ -1,6 +1,7 @@
 package items.material;
 
 import items.Item;
+import java.util.Objects;
 
 public abstract class Materials extends Item {
 
@@ -32,7 +33,8 @@ public abstract class Materials extends Item {
     }
 
     public String toString() {
-        String s = String.format("%-20s\t%-20s\t%-20s\t%8.2f\t",
+        // | %-20s | %-20s | %-20s | %-7d |
+        String s = String.format("%-20s | %-25s | %-20s | %20.2f ",
                 this.getName(), this.getLocation(), this.getRareity(), this.getPrice());
         return s;
     }
@@ -41,19 +43,20 @@ public abstract class Materials extends Item {
     //
     @Override
     public boolean equals(Object o) {
-        if (o == this)
+        if (this == o)
             return true;
-        if (!(o instanceof Materials)) {
+        if (o == null || getClass() != o.getClass())
             return false;
-        }
+        Materials materials = (Materials) o;
+        return Float.compare(materials.getPrice(), this.getPrice()) == 0 &&
+                Objects.equals(this.getName(), materials.getName()) &&
+                Objects.equals(location, materials.location) &&
+                Objects.equals(rareity, materials.rareity);
+    }
 
-        Materials c = (Materials) o;
-
-        return Double.compare(c.price, this.price) == 0 &&
-                c.name == this.name &&
-                c.location == this.location &&
-                c.rareity == this.rareity;
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getPrice(), location, rareity);
     }
 
 }
