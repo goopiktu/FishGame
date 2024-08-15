@@ -7,7 +7,7 @@ import items.material.materials.StoreItems;
 import items.potions.Potions;
 
 public class Earth_Potion extends Potions {
-
+    // This approach makes it easier to read.
     public Earth_Potion() {
         super("Earth Potion");
         addRecipe(new Fish("Mudskippers", 1000f, "Dagupan Mangrove Forests", "Rare"));
@@ -17,6 +17,7 @@ public class Earth_Potion extends Potions {
         setPrice();
     }
 
+    // This approach makes it easier to maintain. But harder to read.
     public Earth_Potion(String name, Dagupan_Mangrove_Forests mangrove, Shop shop) {
         super(name);
         addRecipe(mangrove.getFishes().get(0));

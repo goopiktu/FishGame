@@ -10,6 +10,8 @@ import mainMenu.MainMenu;
 //import player.Player;
 public class Game {
     static Scanner sc = new Scanner(System.in);
+
+    private static ItemAtlas itemAtlas = new ItemAtlas();
     private boolean keepRunning = true;
 
     private Taal_Lake taalLake;
@@ -53,7 +55,7 @@ public class Game {
         new Game(
                 new Taal_Lake(),
                 new Galathea_Deep(),
-                new Dagupan_Mangrove_Forests(),
+                new Dagupan_Mangrove_Forests(itemAtlas),
                 new Mindanao_Current(),
                 new Holgrehenn_Store(),
                 new Town(),

@@ -2,11 +2,14 @@ package Locations.fishingSpot.fishingSpots;
 
 import Locations.fishingSpot.Fishing_Spot;
 import items.material.materials.Fish;
+import main.ItemAtlas;
 
-public class Galathea_Deep extends Fishing_Spot{
-    public Galathea_Deep() {
+public class Galathea_Deep extends Fishing_Spot {
+    public Galathea_Deep(ItemAtlas item) {
         setName("Galathea Deep");
-        addFish(new Fish("Mariana Snailfish", 1000f, "Galathea Deep", "Rare"));
-        addFish(new Fish("Sardines", 40f, "Galathea Deep", "Common"));
+        // Mariana Snailfiish
+        // Galathea Deep
+        addFish(item.getItemByName("Mariana Snailfish", Fish.class));
+        addFish(item.getItemByName("Sardines", Fish.class));
     }
 }

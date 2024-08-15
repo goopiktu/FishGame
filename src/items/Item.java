@@ -27,19 +27,24 @@ public abstract class Item {
         return price;
     }
 
+    public Item getItemByName(String name) {
+        if (this.name == name)
+            return this;
+        return null;
+    }
+
     @Override
     public boolean equals(Object o) {
-            if(o == this)
-                return true;
-            if (!(o instanceof Materials)) { 
-                return false; 
-            } 
+        if (o == this)
+            return true;
+        if (!(o instanceof Materials)) {
+            return false;
+        }
 
-            Materials c = (Materials) o;
-                
-            return Double.compare(c.price, this.price) == 0 &&
-                                  c.name == this.name;
-                
+        Materials c = (Materials) o;
+
+        return Double.compare(c.price, this.price) == 0 &&
+                c.name == this.name;
 
     }
 }

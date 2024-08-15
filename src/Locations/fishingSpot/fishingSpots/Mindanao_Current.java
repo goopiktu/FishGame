@@ -2,15 +2,17 @@ package Locations.fishingSpot.fishingSpots;
 
 import Locations.fishingSpot.Fishing_Spot;
 import items.material.materials.Fish;
+import main.ItemAtlas;
 
 /**
  * Mindanao_Current
  */
-public class Mindanao_Current extends Fishing_Spot{
+public class Mindanao_Current extends Fishing_Spot {
 
-    public Mindanao_Current() {
+    public Mindanao_Current(ItemAtlas item) {
         setName("Mindanao Current");
-        addFish(new Fish("Hillstream Loaches", 1000f, "Mindanao Current", "Rare"));
-        addFish(new Fish("Tuna", 45f, "Mindanao Current", "Common"));
+
+        addFish(item.getItemByName("Hillstream Loaches", Fish.class));
+        addFish(item.getItemByName("Tuna", Fish.class));
     }
 }
