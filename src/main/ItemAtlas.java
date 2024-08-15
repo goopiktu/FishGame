@@ -53,6 +53,10 @@ public class ItemAtlas {
         items.add(new Bait("Magical Bait", 300, "Holgrehenn Store", "Common", 2));
     }
 
+    public void initPotionItems() {
+
+    }
+
     public <T extends Item> T getItemByName(String name, Class<T> type) {
         for (Item item : this.items) {
             if (item.getName().equals(name)) {

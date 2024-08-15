@@ -10,6 +10,7 @@ import player.Bag;
 import player.Player;
 import items.Item;
 import items.material.Materials;
+import main.ItemAtlas;
 
 public abstract class Potions extends Item {
 

@@ -53,16 +53,16 @@ public class Game {
     public static void main(String[] args) throws InterruptedException {
         // Create instances for each component and pass them to the Game constructor
         new Game(
-                new Taal_Lake(),
-                new Galathea_Deep(),
+                new Taal_Lake(itemAtlas),
+                new Galathea_Deep(itemAtlas),
                 new Dagupan_Mangrove_Forests(itemAtlas),
-                new Mindanao_Current(),
-                new Holgrehenn_Store(),
+                new Mindanao_Current(itemAtlas),
+                new Holgrehenn_Store(itemAtlas),
                 new Town(),
-                new Air_Potion(),
-                new Earth_Potion(),
-                new Fire_Potion(),
-                new Water_Potion());
+                new Air_Potion(itemAtlas),
+                new Earth_Potion(itemAtlas),
+                new Fire_Potion(itemAtlas),
+                new Water_Potion(itemAtlas));
     }
 
     public boolean getkeepRunning() {

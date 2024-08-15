@@ -1,29 +1,17 @@
 package items.potions.potion_types;
 
-import Locations.fishingSpot.fishingSpots.Dagupan_Mangrove_Forests;
-import Locations.shop.Shop;
 import items.material.materials.Fish;
 import items.material.materials.StoreItems;
 import items.potions.Potions;
+import main.ItemAtlas;
 
 public class Earth_Potion extends Potions {
-    // This approach makes it easier to read.
-    public Earth_Potion() {
+    public Earth_Potion(ItemAtlas item) {
         super("Earth Potion");
-        addRecipe(new Fish("Mudskippers", 1000f, "Dagupan Mangrove Forests", "Rare"));
-        addRecipe(new StoreItems("Gold", 750, "Shop", "Common"));
-        addRecipe(new StoreItems("Majestic Water", 100, "Shop", "Common"));
-        addRecipe(new StoreItems("Wondrous Vinegar", 150, "Shop", "Common"));
-        setPrice();
-    }
-
-    // This approach makes it easier to maintain. But harder to read.
-    public Earth_Potion(String name, Dagupan_Mangrove_Forests mangrove, Shop shop) {
-        super(name);
-        addRecipe(mangrove.getFishes().get(0));
-        addRecipe(shop.getMats().get(0));
-        addRecipe(shop.getMats().get(1));
-        addRecipe(shop.getMats().get(2));
+        addRecipe(item.getItemByName("Mudskippers", Fish.class));
+        addRecipe(item.getItemByName("Gold", StoreItems.class));
+        addRecipe(item.getItemByName("Majestic Water", StoreItems.class));
+        addRecipe(item.getItemByName("Wondrous Vinegar", StoreItems.class));
         setPrice();
     }
 
