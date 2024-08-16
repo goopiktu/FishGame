@@ -149,7 +149,7 @@ public class MainMenu {
 				Choices(player, game);
 				break;
 			}
-			case 8: {
+			case 0: {
 				game.setkeepRunning(false);
 				break;
 			}

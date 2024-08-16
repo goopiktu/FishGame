@@ -31,9 +31,19 @@ public class ShopMenuHandler {
 	public void shopMenu(Player player, int input, Game game) {
 		switch (input) {
 			case 1: {
-				this.shop.showShop();
+				int index = 0;
 				System.out.println("What do you want to buy:");
-				int index = Game.scInt() - 1;
+
+				this.shop.showShop();
+				InteractiveMenu menu = new InteractiveMenu(this.shop.getMatsAsStrings());
+				try {
+					index = menu.display();
+					index += 1;
+					System.out.println("You selected: " + index);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
 				System.out.println("How much do you want to buy:");
 				int qty = Game.scInt();
 				Game.scStr();

@@ -15,7 +15,7 @@ import org.jline.utils.InfoCmp.Capability;
 public final class InteractiveMenu {
 
     public static final String ANSI_RESET = "\u001B[0m";
-
+    public static final String ANSI_UNDERLINE = "\u001B[4m";
     public static final String ANSI_GREEN = "\u001B[32m";
 
     private static final boolean IS_SUPPORTED_CONSOLE = !Boolean.getBoolean("imenu.noFancyMenu")
@@ -32,6 +32,58 @@ public final class InteractiveMenu {
             return fancyMenu();
         }
         return boringMenu();
+    }
+
+    public int displayBagMenu() throws IOException {
+        int selection = 0;
+        try (Terminal term = TerminalBuilder.terminal()) {
+            term.enterRawMode();
+            PrintWriter writer = term.writer();
+
+            KeyMap<String> keyMap = new KeyMap<>();
+            keyMap.setAmbiguousTimeout(200);
+            keyMap.bind("up", KeyMap.key(term, Capability.key_up));
+            keyMap.bind("down", KeyMap.key(term, Capability.key_down));
+            keyMap.bind("exit", KeyMap.esc(), KeyMap.ctrl('c'));
+            keyMap.bind("enter", "\r");
+
+            BindingReader bindingReader = new BindingReader(term.reader());
+
+            for (int i = 0; i < options.length; i++) {
+                // If i == 0 should be arrows other wise should be ||
+                String leftHand = i == 0 ? ANSI_GREEN + ">>>" + ANSI_RESET : "|| ";
+
+                writer.println(leftHand + "  " + (i + 1) + "   " + options[i]);
+            }
+            // For exit
+            writer.println(ANSI_UNDERLINE + "||                      EXIT                      ||" + ANSI_RESET);
+
+            while (true) {
+                int prevSelection = selection;
+                String key = bindingReader.readBinding(keyMap);
+                switch (key) {
+                    case "up":
+                        selection--;
+                        if (selection == -1) {
+                            selection = options.length;
+                        }
+                        break;
+                    case "down":
+                        selection++;
+                        if (selection > options.length) {
+                            selection = 0;
+                        }
+                        break;
+                    case "enter":
+                        return selection == options.length ? -1 : selection;
+                    case "exit":
+                        return -1;
+                }
+                printUp(writer, ANSI_RESET + "|| " + ANSI_RESET, options.length + 1 - prevSelection);
+                printUp(writer, ANSI_GREEN + ">>>" + ANSI_RESET,
+                        options.length + 1 - selection);
+            }
+        }
     }
 
     private int boringMenu() {

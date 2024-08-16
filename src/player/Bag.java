@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.Map.Entry;
 
 import items.Item;
+import main.InteractiveMenu;
 
 public class Bag {
 
@@ -96,18 +97,39 @@ public class Bag {
 
     public void printBag() {
         String spacer = "Items";
-        int count = 1;
 
-        System.out.format("#================================================#\n");
-        System.out.format("|| Row || %-30s || Qty ||\n", spacer);
-        System.out.format("#================================================#\n");
+        int input = 0;
+        int i = 0;
+        String[] temp = new String[this.bag.size()];
+
+        System.out.format("#==================================================#\n");
+        System.out.format("||  Row  || %-30s || Qty ||\n", spacer);
+        System.out.format("#==================================================#\n");
+
         for (Entry<Item, Integer> bag : this.bag.entrySet()) {
             // System.out.println(bag.getKey().getName() + " : " + bag.getValue());
-            System.out.format("|| %2d  || %-30s || %2d  ||\n", count, bag.getKey().getName(), bag.getValue());
-            count++;
+            temp[i] = String.format("|| %-30s || %2d  ||", bag.getKey().getName(), bag.getValue());
+            i++;
         }
-        System.out.printf("#================================================#\n");
+        InteractiveMenu menu = new InteractiveMenu(temp);
+
+        try {
+            input = menu.displayBagMenu();
+            input += 1;
+            System.out.println("You selected: " + input);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.printf("#=================================================#\n");
     }
+
+    // @Override
+    // public String toString(){
+    // String s = String.format("%-20s | %-25s | %-20s | %20.2f ",
+    // this.getName(), this.getLocation(), this.getRareity(), this.getPrice());
+    // return s;
+    // }
     // @Override
     // public String toString() {
 

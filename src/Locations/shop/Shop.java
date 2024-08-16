@@ -1,4 +1,5 @@
 package Locations.shop;
+
 import java.util.ArrayList;
 
 import items.material.Materials;
@@ -6,8 +7,8 @@ import items.material.Materials;
 public class Shop {
     private String name;
     private ArrayList<Materials> mats;
-    
-    public Shop(){
+
+    public Shop() {
         name = "";
         mats = new ArrayList<Materials>();
     }
@@ -22,6 +23,16 @@ public class Shop {
 
     public ArrayList<Materials> getMats() {
         return mats;
+    }
+
+    public String[] getMatsAsStrings() {
+        String[] temp = new String[mats.size()];
+        int i = 0;
+        for (Materials materials : mats) {
+            temp[i] = materials.toString();
+            i++;
+        }
+        return temp;
     }
 
     public void setAllMats(ArrayList<Materials> mats) {
@@ -44,13 +55,12 @@ public class Shop {
         }
     }
 
-    public int lookForItem (String name) {
-		for (int i = 0; i < mats.size(); i++) {
-            if(mats.get(i).getName().equals(name))
+    public int lookForItem(String name) {
+        for (int i = 0; i < mats.size(); i++) {
+            if (mats.get(i).getName().equals(name))
                 return i;
         }
         return -1;
-	}
-    
-    
+    }
+
 }
