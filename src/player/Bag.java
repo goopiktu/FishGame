@@ -13,20 +13,32 @@ import java.util.Map.Entry;
 import items.Item;
 
 public class Bag {
+
     private LinkedHashMap<Item, Integer> bag;
     private ArrayList<Item> items;
+    private Item[] itemMapping;
 
     public Bag() {
         this.items = new ArrayList<Item>();
         this.bag = new LinkedHashMap<Item, Integer>();
     }
 
+    // The whole list with duplicaiton
     public ArrayList<Item> getItems() {
         return items;
     }
 
+    // The entire bad with no duplicaiton
     public LinkedHashMap<Item, Integer> getBag() {
         return bag;
+    }
+
+    // Get Item in bag by index
+    public Item getItemByIndex(int i) {
+        if (i < 0 && i > itemMapping.length) {
+            return null;
+        }
+        return itemMapping[i];
     }
 
     public void setMaterials(ArrayList<Item> item) {
@@ -38,6 +50,15 @@ public class Bag {
         this.items.remove(item);
         setBag(items);
     }
+
+    public void removeItems(Item item, int i) {
+
+    }
+
+    // public void removeItemByIndex(int i) {
+    // Item item = this.getItems().get(i);
+    // this.items.remove(item);
+    // }
 
     public void addItem(Item item) {
         this.items.add(item);
@@ -52,7 +73,6 @@ public class Bag {
     }
 
     public void setBag(ArrayList<Item> item) {
-
         // this makes it so that i know all the materials without duplicates
         Set<Item> uniqueItems = new LinkedHashSet<Item>();
         uniqueItems.addAll(item);
@@ -67,18 +87,33 @@ public class Bag {
             frequency = Collections.frequency(this.getItems(), arrayUniqueItems[i]);
             this.bag.put(arrayUniqueItems[i], frequency);
         }
+        setItemMapping();
+    }
+
+    public void setItemMapping() {
+        this.itemMapping = new Item[this.bag.size()];
+        int counter = 0;
+        for (Entry<Item, Integer> bag : this.bag.entrySet()) {
+            this.itemMapping[counter] = bag.getKey();
+            counter++;
+        }
+        for (int i = 0; i < itemMapping.length; i++) {
+            System.out.println("" + i + this.itemMapping[i]);
+        }
     }
 
     public void printBag() {
         String spacer = "Items";
-        System.out.printf("+=========================================+\n");
-        System.out.printf("|| %-33s Qty ||\n", spacer);
+        int count = 1;
+        System.out.printf("#================================================#\n");
+        System.out.printf("|| Row || %-30s || Qty ||\n", spacer);
+        System.out.printf("#================================================#\n");
         for (Entry<Item, Integer> bag : this.bag.entrySet()) {
             // System.out.println(bag.getKey().getName() + " : " + bag.getValue());
-
-            System.out.printf("|| %-35s%d  ||\n", bag.getKey().getName(), bag.getValue());
+            System.out.printf("|| %2d  || %-30s || %2d  ||\n", count, bag.getKey().getName(), bag.getValue());
+            count++;
         }
-        System.out.printf("+=========================================+\n");
+        System.out.printf("#================================================#\n");
     }
     // @Override
     // public String toString() {

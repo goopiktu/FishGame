@@ -1,7 +1,6 @@
 package main;
 
 import items.Item;
-import items.material.Materials;
 import items.material.materials.Bait;
 import items.material.materials.Fish;
 import items.material.materials.StoreItems;

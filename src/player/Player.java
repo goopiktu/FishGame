@@ -1,11 +1,10 @@
 package player;
 
-import java.util.HashMap;
-
 import java.util.Random;
 
 import Locations.fishingSpot.Fishing_Spot;
 import Locations.shop.Shop;
+import items.Item;
 import items.material.Materials;
 import items.potions.Potions;
 
@@ -15,8 +14,6 @@ public class Player extends playerString {
 	private float money;
 	private String playerLocation;
 	public Bag bag;
-	private HashMap<Integer, Materials> item_id;
-
 	// private boolean bait;
 
 	public Player(String name) {
@@ -24,12 +21,6 @@ public class Player extends playerString {
 		money = 0f;
 		playerLocation = "Geffen Town";
 		bag = new Bag();
-		// bait = false;
-		item_id = new HashMap<>();
-	}
-
-	public HashMap<Integer, Materials> getItem_id() {
-		return item_id;
 	}
 
 	public String getPlayerLocation() {
@@ -126,18 +117,18 @@ public class Player extends playerString {
 		this.money += money;
 	}
 
-	public void sell(Materials materials, Player player, Shop shop, int qty) {
+	public void sell(Item item, Player player, Shop shop, int qty) {
 		if (!player.playerLocation.equals(shop.getName()))
 			return;
 
-		removeItemsFromBag(materials, qty, player);
+		removeItemsFromBag(item, qty, player);
 
 	}
 
-	public void removeItemsFromBag(Materials materials, int qty, Player player) {
+	public void removeItemsFromBag(Item item, int qty, Player player) {
 		for (int i = 0; i < qty; i++) {
-			addMoney(materials.getPrice());
-			player.bag.removeItem(materials);
+			addMoney(item.getPrice());
+			player.bag.removeItem(item);
 		}
 	}
 

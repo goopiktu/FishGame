@@ -1,12 +1,9 @@
 package items.material;
 
 import items.Item;
-import java.util.Objects;
 
 public abstract class Materials extends Item {
 
-    // private String name;
-    // private double price;
     private String location;
     private String rareity;
 
@@ -41,22 +38,4 @@ public abstract class Materials extends Item {
 
     // Name: Price: Location: Rareity:
     //
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        Materials materials = (Materials) o;
-        return Float.compare(materials.getPrice(), this.getPrice()) == 0 &&
-                Objects.equals(this.getName(), materials.getName()) &&
-                Objects.equals(location, materials.location) &&
-                Objects.equals(rareity, materials.rareity);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getName(), getPrice(), location, rareity);
-    }
-
 }

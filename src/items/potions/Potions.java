@@ -6,11 +6,10 @@ import java.util.Set;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
-import player.Bag;
+
 import player.Player;
 import items.Item;
 import items.material.Materials;
-import main.ItemAtlas;
 
 public abstract class Potions extends Item {
 

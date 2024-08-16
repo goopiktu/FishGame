@@ -1,6 +1,6 @@
 package items;
 
-import items.material.Materials;
+import java.util.Objects;
 
 public abstract class Item {
     protected String name;
@@ -35,16 +35,17 @@ public abstract class Item {
 
     @Override
     public boolean equals(Object o) {
-        if (o == this)
+        if (this == o)
             return true;
-        if (!(o instanceof Materials)) {
+        if (!(o instanceof Item))
             return false;
-        }
+        Item item = (Item) o;
+        return Float.compare(item.price, price) == 0 &&
+                name.equals(item.name);
+    }
 
-        Materials c = (Materials) o;
-
-        return Double.compare(c.price, this.price) == 0 &&
-                c.name == this.name;
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, price);
     }
 }
