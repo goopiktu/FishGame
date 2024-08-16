@@ -2,9 +2,6 @@ package player;
 
 import java.util.ArrayList;
 import java.util.Collections;
-// import java.util.HashSet;
-// import java.util.List;
-// import java.util.Set;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -55,11 +52,6 @@ public class Bag {
 
     }
 
-    // public void removeItemByIndex(int i) {
-    // Item item = this.getItems().get(i);
-    // this.items.remove(item);
-    // }
-
     public void addItem(Item item) {
         this.items.add(item);
         setBag(items);
@@ -105,12 +97,13 @@ public class Bag {
     public void printBag() {
         String spacer = "Items";
         int count = 1;
-        System.out.printf("#================================================#\n");
-        System.out.printf("|| Row || %-30s || Qty ||\n", spacer);
-        System.out.printf("#================================================#\n");
+
+        System.out.format("#================================================#\n");
+        System.out.format("|| Row || %-30s || Qty ||\n", spacer);
+        System.out.format("#================================================#\n");
         for (Entry<Item, Integer> bag : this.bag.entrySet()) {
             // System.out.println(bag.getKey().getName() + " : " + bag.getValue());
-            System.out.printf("|| %2d  || %-30s || %2d  ||\n", count, bag.getKey().getName(), bag.getValue());
+            System.out.format("|| %2d  || %-30s || %2d  ||\n", count, bag.getKey().getName(), bag.getValue());
             count++;
         }
         System.out.printf("#================================================#\n");

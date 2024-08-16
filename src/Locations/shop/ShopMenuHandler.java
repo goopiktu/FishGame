@@ -1,24 +1,30 @@
 package Locations.shop;
 
 import main.Game;
+import main.InteractiveMenu;
 import player.Player;
 
 public class ShopMenuHandler {
 
 	private Shop shop;
 
+	private String[] shopChoice = { "Buy", "Sell" };
+
 	public ShopMenuHandler(Shop shop) {
 		this.shop = shop;
 	}
 
 	public void shopChoice(Player player, Game game) {
+		int input = 0;
 		player.status();
-		System.out.println("[1] Buy");
-		System.out.println("[2] Sell");
-		System.out.println("[x] Go back");
-
-		int input = Game.scInt();
-		Game.scStr();
+		InteractiveMenu menu = new InteractiveMenu(shopChoice);
+		try {
+			input = menu.display();
+			input += 1;
+			System.out.println("You selected: " + input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		shopMenu(player, input, game);
 	}
 

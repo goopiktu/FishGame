@@ -3,10 +3,18 @@ package mainMenu;
 import Locations.fishingSpot.*;
 import Locations.shop.ShopMenuHandler;
 import main.Game;
+import main.InteractiveMenu;
 import player.Player;
 
 public class MainMenu {
 	private ShopMenuHandler shopMenuHandler;
+
+	private String[] mainChoices = { "Geffen Town", "Holgrehenn Store", "Taal Lake", "Galathea Deep",
+			"Dagupan Mangrove Forests", "Mindanao Current", "Bag" };
+
+	private String[] potionChoices = { "Air Potion", "Earth Potion", "Fire Potion", "Water Potion" };
+
+	private String[] fishChoices = { "Use Bait", "Catch Fish" };
 
 	public MainMenu(Game game) throws InterruptedException {
 		shopMenuHandler = new ShopMenuHandler(game.getHolgrehennStore());
@@ -23,42 +31,50 @@ public class MainMenu {
 	}
 
 	public void Choices(Player player, Game game) throws InterruptedException {
+		int input = 0;
 		while (game.getkeepRunning()) {
 			player.status();
-			if (player.getPlayerLocation().equals(game.getGeffenTown().getName())) {
-				System.out.println("[1] Craft Potion");
-			} else
-				System.out.println("[1] Geffen Town");
-			System.out.println("[2] Holgrehenn Store");
-			System.out.println("[3] Taal Lake");
-			System.out.println("[4] Galathea Deep");
-			System.out.println("[5] Dagupan Mangrove Forests");
-			System.out.println("[6] Mindanao Current");
-			System.out.println("[7] Bag");
-			System.out.println("[8] Exit.");
 
-			// System.out.println("You're in " + player.getPlayerLocation());
+			// Determine the first option based on the player's location
+			String firstOption = player.getPlayerLocation().equals(game.getGeffenTown().getName())
+					? "Craft Potion"
+					: "Geffen Town";
 
-			int input = Game.scInt();
-			Game.scStr();
+			String[] menuOptions = new String[mainChoices.length];
+			menuOptions[0] = firstOption;
+			System.arraycopy(mainChoices, 1, menuOptions, 1, mainChoices.length - 1);
+
+			// Display the menu
+			InteractiveMenu menu = new InteractiveMenu(menuOptions);
+
+			try {
+				input = menu.display();
+				input += 1;
+				System.out.println("You selected: " + input);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 			if (player.getPlayerLocation().equals(game.getGeffenTown().getName()) && input == 1) {
 				craftChoice(player, game);
-			} else
+			} else {
 				mainMenu(player, input, game);
-
+			}
 		}
 	}
 
 	private void craftChoice(Player player, Game game) throws InterruptedException {
+		int input = 0;
+		InteractiveMenu menu = new InteractiveMenu(potionChoices);
 
-		System.out.println("[1] Air Potion");
-		System.out.println("[2] Earth Potion");
-		System.out.println("[3] Fire Potion");
-		System.out.println("[4] Water Potion");
-		System.out.println("[x] Back");
+		try {
+			input = menu.display();
+			input += 1;
+			System.out.println("You selected: " + input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-		int input = Game.scInt();
-		Game.scStr();
 		craftMenu(player, input, game);
 
 	}
@@ -145,13 +161,18 @@ public class MainMenu {
 	}
 
 	private void fishChoice(Player player, Fishing_Spot fspot, Game game) throws InterruptedException {
+		int input = 0;
 		player.status();
 
-		System.out.println("[1] Use bait");
-		System.out.println("[2] Catch Fish");
-		System.out.println("[x] Go back");
+		InteractiveMenu menu = new InteractiveMenu(fishChoices);
 
-		int input = Game.scInt();
+		try {
+			input = menu.display();
+			input += 1;
+			System.out.println("You selected: " + input);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		fishMenu(player, input, fspot, game);
 	}
 
