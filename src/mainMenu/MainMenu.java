@@ -144,7 +144,7 @@ public class MainMenu {
 			case 7: {
 				// System.out.println(Arrays.toString(player.bag.getBag().toArray()));
 
-				player.bag.printBag();
+				player.getBag().printBag();
 
 				Choices(player, game);
 				break;

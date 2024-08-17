@@ -2,7 +2,11 @@ package Locations.shop;
 
 import java.util.ArrayList;
 
+import items.Item;
+import java.util.Map.Entry;
 import items.material.Materials;
+import main.InteractiveMenu;
+import player.Player;
 
 public class Shop {
     private String name;
@@ -61,6 +65,37 @@ public class Shop {
                 return i;
         }
         return -1;
+    }
+
+    public int checkPlayerBag(Player player) {
+        String spacer = "Items";
+
+        int input = 0;
+        int i = 0;
+        String[] temp = new String[player.getBagSize()];
+
+        System.out.format("#==================================================#\n");
+        System.out.format("||  Row  || %-30s || Qty ||\n", spacer);
+        System.out.format("#==================================================#\n");
+
+        for (Entry<Item, Integer> bag : player.getBag().getBag().entrySet()) {
+            // System.out.println(bag.getKey().getName() + " : " + bag.getValue());
+            temp[i] = String.format("|| %-30s || %2d  ||", bag.getKey().getName(), bag.getValue());
+            i++;
+        }
+        InteractiveMenu menu = new InteractiveMenu(temp);
+
+        try {
+            input = menu.displayBagMenu();
+            System.out.printf("#=================================================#\n");
+            input += 1;
+            System.out.println("You selected: " + input);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return input;
+
     }
 
 }

@@ -13,7 +13,7 @@ public class Player extends playerString {
 	private String name;
 	private float money;
 	private String playerLocation;
-	public Bag bag;
+	private Bag bag;
 	// private boolean bait;
 
 	public Player(String name) {
@@ -21,6 +21,14 @@ public class Player extends playerString {
 		money = 0f;
 		playerLocation = "Geffen Town";
 		bag = new Bag();
+	}
+
+	public Bag getBag() {
+		return bag;
+	}
+
+	public int getBagSize() {
+		return bag.getBag().size();
 	}
 
 	public String getPlayerLocation() {

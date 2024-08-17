@@ -52,17 +52,18 @@ public class ShopMenuHandler {
 				break;
 			}
 			case 2: {
-				// System.out.println(player.);
 
-				player.bag.printBag();
+				// print player bag
+
 				System.out.println("What do you want to sell:");
-				int index = Game.scInt();
+
+				int row = this.shop.checkPlayerBag(player);
+
 				System.out.println("How much do you want to sell:");
 				int qty = Game.scInt();
 				Game.scStr();
 
-				// System.out.println("Item by index " + player.bag.getItemByIndex(index));
-				player.sell(player.bag.getItemByIndex(index - 1), player, this.shop, qty);
+				player.sell(player.getBag().getItemByIndex(row - 1), player, this.shop, qty);
 				break;
 			}
 		}

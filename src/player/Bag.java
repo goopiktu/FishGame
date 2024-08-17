@@ -8,11 +8,10 @@ import java.util.Set;
 import java.util.Map.Entry;
 
 import items.Item;
-import main.InteractiveMenu;
 
 public class Bag {
 
-    private LinkedHashMap<Item, Integer> bag;
+    private LinkedHashMap<Item, Integer> bag; // Item: key, Value: Qty
     private ArrayList<Item> items;
     private Item[] itemMapping;
 
@@ -39,18 +38,25 @@ public class Bag {
         return itemMapping[i];
     }
 
+    // Set Items
     public void setMaterials(ArrayList<Item> item) {
         this.items = item;
         setBag(items);
     }
 
+    // Remove from
     public void removeItem(Item item) {
         this.items.remove(item);
-        setBag(items);
-    }
-
-    public void removeItems(Item item, int i) {
-
+        // Adjust the bag directly
+        if (this.bag.containsKey(item)) {
+            int count = this.bag.get(item);
+            if (count > 1) {
+                this.bag.put(item, count - 1);
+            } else {
+                this.bag.remove(item); // Remove item if count goes to zero
+            }
+        }
+        setItemMapping(); // Update the item mapping after removal
     }
 
     public void addItem(Item item) {
@@ -67,20 +73,14 @@ public class Bag {
 
     public void setBag(ArrayList<Item> item) {
         // this makes it so that i know all the materials without duplicates
-        Set<Item> uniqueItems = new LinkedHashSet<Item>();
-        uniqueItems.addAll(item);
+        this.bag.clear(); // Clear the existing map before recalculating
 
-        int size = uniqueItems.size();
-        int frequency = 0;
-
-        Item[] arrayUniqueItems = new Item[size];
-        arrayUniqueItems = uniqueItems.toArray(arrayUniqueItems);
-
-        for (int i = 0; i < size; i++) {
-            frequency = Collections.frequency(this.getItems(), arrayUniqueItems[i]);
-            this.bag.put(arrayUniqueItems[i], frequency);
+        Set<Item> uniqueItems = new LinkedHashSet<>(item);
+        for (Item uniqueItem : uniqueItems) {
+            int frequency = Collections.frequency(this.getItems(), uniqueItem);
+            this.bag.put(uniqueItem, frequency);
         }
-        setItemMapping();
+        setItemMapping(); // Update the item mapping after setting the bag
     }
 
     public void setItemMapping() {
@@ -90,106 +90,23 @@ public class Bag {
             this.itemMapping[counter] = bag.getKey();
             counter++;
         }
-        for (int i = 0; i < itemMapping.length; i++) {
-            System.out.println("" + i + this.itemMapping[i]);
-        }
     }
 
     public void printBag() {
         String spacer = "Items";
 
-        int input = 0;
         int i = 0;
-        String[] temp = new String[this.bag.size()];
 
         System.out.format("#==================================================#\n");
         System.out.format("||  Row  || %-30s || Qty ||\n", spacer);
         System.out.format("#==================================================#\n");
 
         for (Entry<Item, Integer> bag : this.bag.entrySet()) {
-            // System.out.println(bag.getKey().getName() + " : " + bag.getValue());
-            temp[i] = String.format("|| %-30s || %2d  ||", bag.getKey().getName(), bag.getValue());
+            System.out.format("||   %d   || %-30s || %2d  ||\n", i + 1, bag.getKey().getName(), bag.getValue());
             i++;
-        }
-        InteractiveMenu menu = new InteractiveMenu(temp);
 
-        try {
-            input = menu.displayBagMenu();
-            input += 1;
-            System.out.println("You selected: " + input);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
-        System.out.printf("#=================================================#\n");
+        System.out.printf("#==================================================#\n");
     }
-
-    // @Override
-    // public String toString(){
-    // String s = String.format("%-20s | %-25s | %-20s | %20.2f ",
-    // this.getName(), this.getLocation(), this.getRareity(), this.getPrice());
-    // return s;
-    // }
-    // @Override
-    // public String toString() {
-
-    // }
-
-    // need to make the bag a hashmap instead of a arraylist since
-    // i need to count how many occurences there are for each item
-
-    // protected String toString(){
-    // return Integer.toString(addressNo);
-    // }
-    // public String toString() {
-
-    // }
-
-    // #######################################################
-    // public void removefromBag(String name) {
-
-    // for (Materials i : this.bag) {
-    // if(i.getName().equals(name)) {
-    // this.bag.remove(i);
-    // return;
-    // }
-    // }
-    // }
-
-    // public boolean lookForItem (Materials name) {
-    // for (int i = 0; i < bag.size(); i++) {
-    // if(bag.get(i).getName().equals(name.getName()))
-    // return true;
-    // }
-    // return false;
-    // }
-
-    // public ArrayList<Materials> getBag() {
-    // return bag;
-    // }
-
-    // public void checkBag() {
-    // Set<Materials> uniqueItems = new HashSet<>(bag);
-
-    // int iteration = 0;
-    // System.out.println("=======================================");
-    // for (Materials item : uniqueItems) {
-    // iteration++;
-    // item_id.put(iteration, item);
-    // checkBagString(iteration, item, bag);
-    // }
-    // if(iteration == 0)
-    // System.out.println("EMPTY");
-    // System.out.println("=======================================");
-
-    // }
-
-    // public void addItemToBag(Materials materials) {
-    // bag.add(materials);
-    // }
-
-    // public void addItemsToBag(List<Materials> materials) {
-    // bag.addAll(bag);
-    // }
-
 }
