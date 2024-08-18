@@ -35,14 +35,6 @@ public class ShopMenuHandler {
 				System.out.println("What do you want to buy:");
 
 				this.shop.showShop();
-				InteractiveMenu menu = new InteractiveMenu(this.shop.getMatsAsStrings());
-				try {
-					index = menu.display();
-					index += 1;
-					System.out.println("You selected: " + index);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 
 				System.out.println("How much do you want to buy:");
 				int qty = Game.scInt();

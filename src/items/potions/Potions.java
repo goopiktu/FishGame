@@ -10,12 +10,15 @@ import java.util.Map.Entry;
 import player.Player;
 import items.Item;
 import items.material.Materials;
+import main.ItemAtlas;
 
 public abstract class Potions extends Item {
 
     // private String name;
     private ArrayList<Materials> recipe;
     private LinkedHashMap<Materials, Integer> uniqueRecipe;
+
+    private ItemAtlas item;
 
     public Potions(String name) {
         super(name, 0);
@@ -25,6 +28,10 @@ public abstract class Potions extends Item {
 
     public String getName() {
         return name;
+    }
+
+    public ItemAtlas getItemInAtlas() {
+        return item;
     }
 
     public void setName(String name) {

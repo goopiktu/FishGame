@@ -4,6 +4,7 @@ import items.Item;
 import items.material.materials.Bait;
 import items.material.materials.Fish;
 import items.material.materials.StoreItems;
+import items.potions.potion_types.*;
 
 import java.util.ArrayList;
 
@@ -18,6 +19,7 @@ public class ItemAtlas {
         initFishItems();
         initMarketItems();
         initBaitItems();
+        initPotionItems();
     }
 
     public void initFishItems() {
@@ -53,7 +55,10 @@ public class ItemAtlas {
     }
 
     public void initPotionItems() {
-
+        items.add(new Air_Potion(this));
+        items.add(new Earth_Potion(this));
+        items.add(new Fire_Potion(this));
+        items.add(new Water_Potion(this));
     }
 
     public <T extends Item> T getItemByName(String name, Class<T> type) {

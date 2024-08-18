@@ -8,6 +8,7 @@ import main.ItemAtlas;
 public class Air_Potion extends Potions {
     public Air_Potion(ItemAtlas item) {
         super("Air Potion");
+
         addRecipe(item.getItemByName("Hillstream Loaches", Fish.class));
         addRecipe(item.getItemByName("Gold", StoreItems.class));
         addRecipe(item.getItemByName("Majestic Water", StoreItems.class));

@@ -4,7 +4,7 @@ import java.util.Scanner;
 import Locations.fishingSpot.fishingSpots.*;
 import Locations.shop.shops.Holgrehenn_Store;
 import Locations.town.Town;
-import items.potions.potion_types.*;
+import items.Item;
 import mainMenu.MainMenu;
 
 //import player.Player;
@@ -21,10 +21,6 @@ public class Game {
     private Holgrehenn_Store holgrehennStore;
     private Town geffenTown;
     private MainMenu menu;
-    private Air_Potion airPotion;
-    private Earth_Potion earthPotion;
-    private Fire_Potion firePotion;
-    private Water_Potion waterPotion;
 
     public Game(
             Taal_Lake taalLake,
@@ -32,21 +28,13 @@ public class Game {
             Dagupan_Mangrove_Forests mangroveForests,
             Mindanao_Current mindanaoCurrent,
             Holgrehenn_Store holgrehennStore,
-            Town geffenTown,
-            Air_Potion airPotion,
-            Earth_Potion earthPotion,
-            Fire_Potion firePotion,
-            Water_Potion waterPotion) throws InterruptedException {
+            Town geffenTown) throws InterruptedException {
         this.taalLake = taalLake;
         this.galatheaDeep = galatheaDeep;
         this.mangroveForests = mangroveForests;
         this.mindanaoCurrent = mindanaoCurrent;
         this.holgrehennStore = holgrehennStore;
         this.geffenTown = geffenTown;
-        this.airPotion = airPotion;
-        this.earthPotion = earthPotion;
-        this.firePotion = firePotion;
-        this.waterPotion = waterPotion;
         this.menu = new MainMenu(this);
     }
 
@@ -58,11 +46,11 @@ public class Game {
                 new Dagupan_Mangrove_Forests(itemAtlas),
                 new Mindanao_Current(itemAtlas),
                 new Holgrehenn_Store(itemAtlas),
-                new Town(),
-                new Air_Potion(itemAtlas),
-                new Earth_Potion(itemAtlas),
-                new Fire_Potion(itemAtlas),
-                new Water_Potion(itemAtlas));
+                new Town());
+    }
+
+    public <T extends Item> T getItemFromAtlas(String name, Class<T> type) {
+        return itemAtlas.getItemByName(name, type);
     }
 
     public boolean getkeepRunning() {
@@ -79,22 +67,6 @@ public class Game {
 
     public static int scInt() {
         return sc.nextInt();
-    }
-
-    public Air_Potion getAirPotion() {
-        return airPotion;
-    }
-
-    public Earth_Potion getEarthPotion() {
-        return earthPotion;
-    }
-
-    public Fire_Potion getFirePotion() {
-        return firePotion;
-    }
-
-    public Water_Potion getWaterPotion() {
-        return waterPotion;
     }
 
     public Taal_Lake getTaalLake() {

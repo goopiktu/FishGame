@@ -2,6 +2,10 @@ package mainMenu;
 
 import Locations.fishingSpot.*;
 import Locations.shop.ShopMenuHandler;
+import items.potions.potion_types.Air_Potion;
+import items.potions.potion_types.Earth_Potion;
+import items.potions.potion_types.Fire_Potion;
+import items.potions.potion_types.Water_Potion;
 import main.Game;
 import main.InteractiveMenu;
 import player.Player;
@@ -83,28 +87,31 @@ public class MainMenu {
 
 		switch (input) {
 			case 1: {
-				game.getAirPotion().showRecipe(player);
-				player.craftPotion(game.getAirPotion());
+				Air_Potion airPotion = game.getItemFromAtlas("Air Potion", Air_Potion.class);
+				airPotion.showRecipe(player);
+				player.craftPotion(airPotion);
 				break;
 			}
 			case 2: {
-				game.getEarthPotion().showRecipe(player);
-				player.craftPotion(game.getEarthPotion());
+				Earth_Potion earthPotion = game.getItemFromAtlas("Earth Potion", Earth_Potion.class);
+				earthPotion.showRecipe(player);
+				player.craftPotion(earthPotion);
 				break;
 			}
 			case 3: {
-				game.getFirePotion().showRecipe(player);
-				player.craftPotion(game.getFirePotion());
+				Fire_Potion firePotion = game.getItemFromAtlas("Fire Potion", Fire_Potion.class);
+				firePotion.showRecipe(player);
+				player.craftPotion(firePotion);
 				break;
 			}
 			case 4: {
-				game.getWaterPotion().showRecipe(player);
-				player.craftPotion(game.getWaterPotion());
+				Water_Potion waterPotion = game.getItemFromAtlas("Water Potion", Water_Potion.class);
+				waterPotion.showRecipe(player);
+				player.craftPotion(waterPotion);
 				break;
 			}
 			default:
 				Choices(player, game);
-				// throw new IllegalArgumentException("Unexpected value: " + input);
 		}
 	}
 

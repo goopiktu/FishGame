@@ -33,7 +33,8 @@ public class Shop {
         String[] temp = new String[mats.size()];
         int i = 0;
         for (Materials materials : mats) {
-            temp[i] = materials.toString();
+
+            temp[i] = String.format("||  %-20s  ||  %-3.2f  ||", materials.getName(), materials.getPrice());
             i++;
         }
         return temp;
@@ -51,12 +52,36 @@ public class Shop {
         this.mats.add(mats);
     }
 
-    public void showShop() {
-        int count = 1;
+    public int showShop() {
+        int index = 0;
+        int count = 0;
+        String spacer = "";
+        String[] temp = new String[mats.size()];
+        System.out.format("   #=============================================#\n");
+        System.out.format("   ||%-15s_%-27s||\r\n" +
+                "   ||%-10s  __| |_  ___ _ __    %-11s||\r\n" +
+                "   ||%-10s (_-< ' \\/ _ \\ '_ \\%-14s||\r\n" +
+                "   ||%-10s /__/_||_\\___/ .__/  %-11s ||\r\n" +
+                "   ||%-10s             |_|      %-11s||\n", spacer, spacer, spacer, spacer, spacer, spacer, spacer,
+                spacer, spacer, spacer);
+        System.out.format("   #=============================================#\n");
         for (Materials i : this.mats) {
-            System.out.println("[" + count + "] " + i);
+            temp[count] = String.format("||  %-20s  ||  %-3.2f  ||", i.getName(), i.getPrice());
             count++;
+
         }
+
+        InteractiveMenu menu = new InteractiveMenu(temp);
+        try {
+            index = menu.buyShopMenu();
+            index += 1;
+            System.out.println("You selected: " + index);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.format("+------------------------------------------+\n");
+        return index;
     }
 
     public int lookForItem(String name) {
@@ -79,8 +104,7 @@ public class Shop {
         System.out.format("#==================================================#\n");
 
         for (Entry<Item, Integer> bag : player.getBag().getBag().entrySet()) {
-            // System.out.println(bag.getKey().getName() + " : " + bag.getValue());
-            temp[i] = String.format("|| %-30s || %2d  ||", bag.getKey().getName(), bag.getValue());
+            temp[i] = String.format("|| %-30s || %2d  ||", bag.getKey().getName(), bag.getValue());
             i++;
         }
         InteractiveMenu menu = new InteractiveMenu(temp);
