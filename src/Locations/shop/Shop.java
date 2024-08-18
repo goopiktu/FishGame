@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import items.Item;
 import java.util.Map.Entry;
+
+import com.googlecode.lanterna.gui2.AnimatedLabel;
+
 import items.material.Materials;
 import main.InteractiveMenu;
 import player.Player;
@@ -11,6 +14,9 @@ import player.Player;
 public class Shop {
     private String name;
     private ArrayList<Materials> mats;
+
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_UNDERLINE = "\u001B[4m";
 
     public Shop() {
         name = "";
@@ -64,7 +70,12 @@ public class Shop {
                 "   ||%-10s /__/_||_\\___/ .__/  %-11s ||\r\n" +
                 "   ||%-10s             |_|      %-11s||\n", spacer, spacer, spacer, spacer, spacer, spacer, spacer,
                 spacer, spacer, spacer);
-        System.out.format("   #=============================================#\n");
+
+        System.out.format("   " + ANSI_UNDERLINE + "#=============================================#\n" + ANSI_RESET);
+
+        System.out.format("%-3s" + ANSI_UNDERLINE + "|| %-3s ||  %-22s||  %-8s||\n" + ANSI_RESET, spacer, "Row",
+                "Items",
+                "Price");
         for (Materials i : this.mats) {
             temp[count] = String.format("||  %-20s  ||  %-3.2f  ||", i.getName(), i.getPrice());
             count++;
@@ -94,17 +105,32 @@ public class Shop {
 
     public int checkPlayerBag(Player player) {
         String spacer = "Items";
-
+        String blank = "";
         int input = 0;
         int i = 0;
         String[] temp = new String[player.getBagSize()];
-
-        System.out.format("#==================================================#\n");
-        System.out.format("||  Row  || %-30s || Qty ||\n", spacer);
-        System.out.format("#==================================================#\n");
+        System.out.format("%-3s#==============================================#\n", blank);
+        System.out.format( //
+                "%-3s||%-44s||\r\n" + //
+                        "%-3s||   _____                 _               %-3s||\r\n" + //
+                        "%-3s||  |     |___ _ _ ___ ___| |_ ___ ___ _ _ %-3s||\r\n" + //
+                        "%-3s||  |-   -|   | | | -_|   |  _| . |  _| | |%-3s||\r\n" + //
+                        "%-3s||  |_____|_|_|\\_/|___|_|_|_| |___|_| |_  |%-3s||\r\n" + //
+                        "%-3s||                                    |___|%-3s||\r\n",
+                blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank);
+        System.out.format("%-3s#==============================================#\n", blank);
+        System.out.format("%-3s||  Row   || %-25s || Qty ||\n", blank, spacer);
+        System.out.format("%-3s#==============================================#\n", blank);
 
         for (Entry<Item, Integer> bag : player.getBag().getBag().entrySet()) {
-            temp[i] = String.format("|| %-30s || %2d  ||", bag.getKey().getName(), bag.getValue());
+            if (temp.length - 1 == i) {
+                temp[i] = String.format(ANSI_UNDERLINE + "|| %-25s || %2d  ||" + ANSI_RESET,
+                        bag.getKey().getName(),
+                        bag.getValue());
+            } else {
+                temp[i] = String.format("|| %-25s || %2d  ||", bag.getKey().getName(), bag.getValue());
+            }
+
             i++;
         }
         InteractiveMenu menu = new InteractiveMenu(temp);

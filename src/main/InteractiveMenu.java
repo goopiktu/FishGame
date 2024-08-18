@@ -50,17 +50,27 @@ public final class InteractiveMenu {
             BindingReader bindingReader = new BindingReader(term.reader());
 
             for (int i = 0; i < options.length; i++) {
-                // If i == 0 should be arrows other wise should be ||
-                String leftHand = i == 0 ? ANSI_GREEN + ">>>" + ANSI_RESET : "|| ";
+                // If i == 0, should be arrows; otherwise, should be "||"
+                String leftHand = i == 0 ? ANSI_GREEN + "><\">" + ANSI_RESET + "|" : "   ||";
 
-                writer.println(leftHand + "  " + (i + 1) + "   " + options[i]);
+                if (i == options.length - 1) {
+                    String leftHandLastOption = "   " + ANSI_UNDERLINE + "||";
+                    writer.println(
+                            String.format("%s   %-5d%s%s", leftHandLastOption, i + 1, options[i], ANSI_RESET));
+                } else {
+                    writer.println(
+                            String.format("%s   %-5d%s", leftHand, i + 1, options[i]));
+                }
             }
+
             // For exit
-            writer.println(ANSI_UNDERLINE + "||                      EXIT                      ||" + ANSI_RESET);
+            writer.println(
+                    "   " + ANSI_UNDERLINE + "||                    EXIT                    ||" + ANSI_RESET);
 
             while (true) {
                 int prevSelection = selection;
                 String key = bindingReader.readBinding(keyMap);
+
                 switch (key) {
                     case "up":
                         selection--;
@@ -79,9 +89,14 @@ public final class InteractiveMenu {
                     case "exit":
                         return -1;
                 }
-                printUp(writer, ANSI_RESET + "|| " + ANSI_RESET, options.length + 1 - prevSelection);
-                printUp(writer, ANSI_GREEN + ">>>" + ANSI_RESET,
-                        options.length + 1 - selection);
+
+                if (options.length + 1 - prevSelection == 2 || options.length + 1 - prevSelection == 1) {
+                    printUp(writer, "   " + ANSI_UNDERLINE + "||" + ANSI_RESET, options.length + 1 - prevSelection);
+                } else {
+                    printUp(writer, "   ||", options.length + 1 - prevSelection);
+                }
+
+                printUp(writer, ANSI_GREEN + "><\">" + ANSI_RESET, options.length + 1 - selection);
             }
         }
     }
@@ -103,14 +118,23 @@ public final class InteractiveMenu {
 
             for (int i = 0; i < options.length; i++) {
                 // If i == 0 should be arrows other wise should be ||
-                String leftHand = i == 0 ? ANSI_GREEN + "> $" + ANSI_RESET + "||" : "   ||";
+                String leftHand = i == 0 ? ANSI_GREEN + "><$>" + ANSI_RESET + "|" : "   ||";
 
-                writer.println(leftHand + "  " + (i + 1) + "  " + options[i]);
+                if (i == options.length - 1) {
+                    String leftHandLastOption = ANSI_RESET + "   " + ANSI_UNDERLINE + "||" + ANSI_RESET;
+                    writer.println(
+                            leftHandLastOption + ANSI_UNDERLINE + "  " + (i + 1) + "  " + options[i] + ANSI_RESET);
+                } else {
+                    writer.println(leftHand + "  " + (i + 1) + "  " + options[i]);
+                }
+
             }
             // For exit
-            writer.println("   " + ANSI_UNDERLINE + "||                   EXIT                    ||" + ANSI_RESET);
+            writer.println(
+                    "   " + ANSI_UNDERLINE + "||                   EXIT                    ||" + ANSI_RESET);
 
             while (true) {
+                // selection can only be 0, 1, 2, 3, 4
                 int prevSelection = selection;
                 String key = bindingReader.readBinding(keyMap);
                 switch (key) {
@@ -131,9 +155,19 @@ public final class InteractiveMenu {
                     case "exit":
                         return -1;
                 }
-                printUp(writer, ANSI_RESET + "   ||" + ANSI_RESET, options.length + 1 - prevSelection);
-                printUp(writer, ANSI_GREEN + "> $" + ANSI_RESET,
+
+                if (((options.length + 1 - prevSelection == 2 || options.length + 1 - prevSelection == 1))) {
+                    printUp(writer, "   " + ANSI_UNDERLINE + "||" + ANSI_RESET,
+                            options.length + 1 - prevSelection);
+
+                } else {
+                    printUp(writer, "   ||", options.length + 1 - prevSelection);
+
+                }
+
+                printUp(writer, ANSI_GREEN + "><$>" + ANSI_RESET,
                         options.length + 1 - selection);
+
             }
         }
     }

@@ -53,7 +53,6 @@ public class ShopMenuHandler {
 
 				System.out.println("How much do you want to sell:");
 				int qty = Game.scInt();
-				Game.scStr();
 
 				player.sell(player.getBag().getItemByIndex(row - 1), player, this.shop, qty);
 				break;

@@ -94,19 +94,22 @@ public class Bag {
 
     public void printBag() {
         String spacer = "Items";
-
+        String blank = "";
         int i = 0;
 
-        System.out.format("#==================================================#\n");
+        System.out.format("#===========================================#\n");
         System.out.format("||  Row  || %-30s || Qty ||\n", spacer);
-        System.out.format("#==================================================#\n");
+        System.out.format("#===========================================#\n");
+        if (this.bag.isEmpty()) {
+            System.out.format("||%-20sEMPTY BAG%-19s||\n", blank, blank);
+        } else {
+            for (Entry<Item, Integer> bag : this.bag.entrySet()) {
+                System.out.format("||   %d   || %-30s || %2d  ||\n", i + 1, bag.getKey().getName(), bag.getValue());
+                i++;
 
-        for (Entry<Item, Integer> bag : this.bag.entrySet()) {
-            System.out.format("||   %d   || %-30s || %2d  ||\n", i + 1, bag.getKey().getName(), bag.getValue());
-            i++;
-
+            }
         }
 
-        System.out.printf("#==================================================#\n");
+        System.out.printf("#===========================================#\n");
     }
 }
